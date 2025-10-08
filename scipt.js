@@ -13,10 +13,17 @@ function showPage(pageId) {
     });
 
     // Show selected section
-    document.getElementById(pageId).classList.add('active');
+    const targetSection = document.getElementById(pageId);
+    if (targetSection) {
+        targetSection.classList.add('active');
+    }
 
-    // Add active class to clicked nav link
-    event.target.classList.add('active');
+    // Add active class to the nav link that corresponds to this page
+    navLinks.forEach(link => {
+        if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(pageId)) {
+            link.classList.add('active');
+        }
+    });
 
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
