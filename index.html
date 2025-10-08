@@ -169,6 +169,218 @@
             margin: 2rem 0;
         }
 
+        /* Manufacturing Simulation Styles */
+        .control-panel {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .control-panel h3 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 1.5rem;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .control-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .control-item label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .control-item input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .control-item input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+        }
+
+        .reset-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .reset-button:hover {
+            background: #764ba2;
+        }
+
+        .stats-panel {
+            display: flex;
+            justify-content: space-around;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .manufacturing-flow {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .machine-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 2rem 0;
+            gap: 2rem;
+        }
+
+        .machine {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            width: 200px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .machine:hover {
+            transform: scale(1.05);
+        }
+
+        .machine-large {
+            width: 250px;
+        }
+
+        .machine-header {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .machine-body {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .machine-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .machine-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .machine-recipe {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .production-count {
+            font-size: 0.9rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .machine-status {
+            margin-top: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            background: #4ade80;
+            color: white;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+
+        .machine-status.waiting {
+            background: #fbbf24;
+        }
+
+        .machine-status.blocked {
+            background: #ef4444;
+        }
+
+        .buffer-row {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin: 1rem 0;
+        }
+
+        .inventory-buffer, .inventory-buffer-center {
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .buffer-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .buffer-amount {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .buffer-amount.high {
+            color: #ef4444;
+        }
+
+        .buffer-amount.medium {
+            color: #fbbf24;
+        }
+
         /* Footer */
         footer {
             background: #333;
@@ -191,6 +403,15 @@
 
             .hero p {
                 font-size: 1rem;
+            }
+
+            .machine-row {
+                flex-direction: column;
+            }
+            
+            .stats-panel {
+                flex-direction: column;
+                gap: 1rem;
             }
         }
     </style>
@@ -250,10 +471,157 @@
         <!-- Information Page -->
         <section id="information" class="page-section content-section">
             <div class="container">
-                <h2>Information</h2>
-                <div class="content-placeholder">
-                    <h3>Content Coming Soon</h3>
-                    <p>This section will contain detailed information about Digital Twins technology</p>
+                <h2>Interactive Manufacturing Simulation</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 2rem;">
+                    Control the production rates and see how changes affect the entire manufacturing process
+                </p>
+
+                <!-- Control Panel -->
+                <div class="control-panel">
+                    <h3>Production Controls</h3>
+                    <div class="controls-grid">
+                        <div class="control-item">
+                            <label>Machine 1 (Bolts): <span id="rate1">5</span> units/sec</label>
+                            <input type="range" id="machine1-rate" min="1" max="10" value="5" step="0.5">
+                        </div>
+                        <div class="control-item">
+                            <label>Machine 2 (Rods): <span id="rate2">5</span> units/sec</label>
+                            <input type="range" id="machine2-rate" min="1" max="10" value="5" step="0.5">
+                        </div>
+                        <div class="control-item">
+                            <label>Machine 4 (Seats): <span id="rate4">3</span> units/sec</label>
+                            <input type="range" id="machine4-rate" min="1" max="10" value="3" step="0.5">
+                        </div>
+                        <div class="control-item">
+                            <label>Machine 5 (Backs): <span id="rate5">3</span> units/sec</label>
+                            <input type="range" id="machine5-rate" min="1" max="10" value="3" step="0.5">
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <button id="reset-btn" class="reset-button">Reset Simulation</button>
+                    </div>
+                </div>
+
+                <!-- Statistics Panel -->
+                <div class="stats-panel">
+                    <div class="stat-item">
+                        <div class="stat-label">Chairs Produced</div>
+                        <div class="stat-value" id="chairs-produced">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Production Rate</div>
+                        <div class="stat-value" id="production-rate">0.0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Efficiency</div>
+                        <div class="stat-value" id="efficiency">100%</div>
+                    </div>
+                </div>
+
+                <!-- Manufacturing Flow Diagram -->
+                <div class="manufacturing-flow">
+                    <!-- Row 1: Machines 1 & 2 -->
+                    <div class="machine-row">
+                        <div class="machine" id="machine1">
+                            <div class="machine-header">Machine 1</div>
+                            <div class="machine-body">
+                                <div class="machine-icon">🔩</div>
+                                <div class="machine-name">Bolt Maker</div>
+                                <div class="production-count">Produced: <span id="count1">0</span></div>
+                                <div class="machine-status">Running</div>
+                            </div>
+                        </div>
+
+                        <div class="machine" id="machine2">
+                            <div class="machine-header">Machine 2</div>
+                            <div class="machine-body">
+                                <div class="machine-icon">📏</div>
+                                <div class="machine-name">Rod Maker</div>
+                                <div class="production-count">Produced: <span id="count2">0</span></div>
+                                <div class="machine-status">Running</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inventory Buffers for Machine 3 -->
+                    <div class="buffer-row">
+                        <div class="inventory-buffer">
+                            <div class="buffer-label">Bolt Inventory</div>
+                            <div class="buffer-amount" id="bolt-inventory">0</div>
+                        </div>
+                        <div class="inventory-buffer">
+                            <div class="buffer-label">Rod Inventory</div>
+                            <div class="buffer-amount" id="rod-inventory">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Machine 3 -->
+                    <div class="machine-row" style="justify-content: center;">
+                        <div class="machine machine-large" id="machine3">
+                            <div class="machine-header">Machine 3</div>
+                            <div class="machine-body">
+                                <div class="machine-icon">🦵</div>
+                                <div class="machine-name">Leg Assembler</div>
+                                <div class="machine-recipe">Needs: 2 Bolts + 1 Rod</div>
+                                <div class="production-count">Produced: <span id="count3">0</span></div>
+                                <div class="machine-status" id="status3">Running</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Machines 4 & 5 with Machine 3 inventory -->
+                    <div class="machine-row">
+                        <div class="machine" id="machine4">
+                            <div class="machine-header">Machine 4</div>
+                            <div class="machine-body">
+                                <div class="machine-icon">💺</div>
+                                <div class="machine-name">Seat Maker</div>
+                                <div class="production-count">Produced: <span id="count4">0</span></div>
+                                <div class="machine-status">Running</div>
+                            </div>
+                        </div>
+
+                        <div class="inventory-buffer-center">
+                            <div class="buffer-label">Leg Inventory</div>
+                            <div class="buffer-amount" id="leg-inventory">0</div>
+                        </div>
+
+                        <div class="machine" id="machine5">
+                            <div class="machine-header">Machine 5</div>
+                            <div class="machine-body">
+                                <div class="machine-icon">🪑</div>
+                                <div class="machine-name">Back Maker</div>
+                                <div class="production-count">Produced: <span id="count5">0</span></div>
+                                <div class="machine-status">Running</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inventory Buffers for Machine 6 -->
+                    <div class="buffer-row">
+                        <div class="inventory-buffer">
+                            <div class="buffer-label">Seat Inventory</div>
+                            <div class="buffer-amount" id="seat-inventory">0</div>
+                        </div>
+                        <div class="inventory-buffer">
+                            <div class="buffer-label">Back Inventory</div>
+                            <div class="buffer-amount" id="back-inventory">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Machine 6 -->
+                    <div class="machine-row" style="justify-content: center;">
+                        <div class="machine machine-large" id="machine6">
+                            <div class="machine-header">Machine 6</div>
+                            <div class="machine-body">
+                                <div class="machine-icon">🪑</div>
+                                <div class="machine-name">Chair Assembler</div>
+                                <div class="machine-recipe">Needs: 1 Leg + 1 Seat + 1 Back</div>
+                                <div class="production-count">Chairs: <span id="count6">0</span></div>
+                                <div class="machine-status" id="status6">Running</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
