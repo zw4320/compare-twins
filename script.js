@@ -38,12 +38,12 @@ let simulation = {
     
     // Production rates (units per second)
     rates: {
-        machine1: 2,    // Bolts (reduced from 5)
-        machine2: 1,    // Rods (reduced from 5)
-        machine3: 0.5,  // Legs (reduced from 3)
-        machine4: 0.5,  // Seats (reduced from 3)
-        machine5: 0.5,  // Backs (reduced from 3)
-        machine6: 0.2   // Chairs (reduced from 2)
+        machine1: 2,    // Bolts
+        machine2: 2,    // Rods
+        machine3: 0.5,  // Legs (fixed rate)
+        machine4: 2,    // Seats
+        machine5: 2,    // Backs
+        machine6: 0.2   // Chairs (fixed rate)
     },
     
     // Inventory/buffers
@@ -77,7 +77,10 @@ let simulation = {
         machine4: 0,
         machine5: 0,
         machine6: 0
-    }
+    },
+    
+    // Overflow tracking
+    overflowAlertShown: false
 };
 
 // Initialize simulation when page loads
@@ -233,6 +236,9 @@ function updateSimulation() {
     // Update display
     updateDisplay();
     
+    // Check for inventory overflow
+    checkInventoryOverflow();
+    
     // Continue simulation
     requestAnimationFrame(updateSimulation);
 }
@@ -273,6 +279,37 @@ function updateElement(id, value) {
     const element = document.getElementById(id);
     if (element) {
         element.textContent = value;
+    }
+}
+
+function checkInventoryOverflow() {
+    const overflowLimit = 200;
+    let overflowItems = [];
+    
+    if (simulation.inventory.bolts > overflowLimit) {
+        overflowItems.push('Bolts: ' + simulation.inventory.bolts);
+    }
+    if (simulation.inventory.rods > overflowLimit) {
+        overflowItems.push('Rods: ' + simulation.inventory.rods);
+    }
+    if (simulation.inventory.legs > overflowLimit) {
+        overflowItems.push('Legs: ' + simulation.inventory.legs);
+    }
+    if (simulation.inventory.seats > overflowLimit) {
+        overflowItems.push('Seats: ' + simulation.inventory.seats);
+    }
+    if (simulation.inventory.backs > overflowLimit) {
+        overflowItems.push('Backs: ' + simulation.inventory.backs);
+    }
+    
+    if (overflowItems.length > 0 && !simulation.overflowAlertShown) {
+        simulation.overflowAlertShown = true;
+        alert('⚠️ TOO MUCH INVENTORY!\n\nThe following items have exceeded 200 units:\n\n' + overflowItems.join('\n') + '\n\nAdjust your production rates to balance the line!');
+        
+        // Reset flag after 5 seconds so alert can show again if problem persists
+        setTimeout(function() {
+            simulation.overflowAlertShown = false;
+        }, 5000);
     }
 }
 
@@ -329,6 +366,7 @@ function resetSimulation() {
     
     simulation.totalTime = 0;
     simulation.lastUpdate = Date.now();
+    simulation.overflowAlertShown = false;
     
     // Reset display
     updateDisplay();
