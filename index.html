@@ -481,20 +481,20 @@
                     <h3>Production Controls</h3>
                     <div class="controls-grid">
                         <div class="control-item">
-                            <label>Machine 1 (Bolts): <span id="rate1">5</span> units/sec</label>
-                            <input type="range" id="machine1-rate" min="1" max="10" value="5" step="0.5">
+                            <label>Machine 1 (Bolts): <span id="rate1">2</span> units/sec</label>
+                            <input type="range" id="machine1-rate" min="0.5" max="5" value="2" step="0.5">
                         </div>
                         <div class="control-item">
-                            <label>Machine 2 (Rods): <span id="rate2">5</span> units/sec</label>
-                            <input type="range" id="machine2-rate" min="1" max="10" value="5" step="0.5">
+                            <label>Machine 2 (Rods): <span id="rate2">1</span> units/sec</label>
+                            <input type="range" id="machine2-rate" min="0.5" max="5" value="1" step="0.5">
                         </div>
                         <div class="control-item">
-                            <label>Machine 4 (Seats): <span id="rate4">3</span> units/sec</label>
-                            <input type="range" id="machine4-rate" min="1" max="10" value="3" step="0.5">
+                            <label>Machine 4 (Seats): <span id="rate4">0.5</span> units/sec</label>
+                            <input type="range" id="machine4-rate" min="0.1" max="3" value="0.5" step="0.1">
                         </div>
                         <div class="control-item">
-                            <label>Machine 5 (Backs): <span id="rate5">3</span> units/sec</label>
-                            <input type="range" id="machine5-rate" min="1" max="10" value="3" step="0.5">
+                            <label>Machine 5 (Backs): <span id="rate5">0.5</span> units/sec</label>
+                            <input type="range" id="machine5-rate" min="0.1" max="3" value="0.5" step="0.1">
                         </div>
                     </div>
                     <div style="text-align: center; margin-top: 1rem;">
@@ -562,7 +562,7 @@
                             <div class="machine-body">
                                 <div class="machine-icon">🦵</div>
                                 <div class="machine-name">Leg Assembler</div>
-                                <div class="machine-recipe">Needs: 2 Bolts + 1 Rod</div>
+                                <div class="machine-recipe">Needs: 8 Bolts + 4 Rods</div>
                                 <div class="production-count">Produced: <span id="count3">0</span></div>
                                 <div class="machine-status" id="status3">Running</div>
                             </div>
@@ -616,7 +616,7 @@
                             <div class="machine-body">
                                 <div class="machine-icon">🪑</div>
                                 <div class="machine-name">Chair Assembler</div>
-                                <div class="machine-recipe">Needs: 1 Leg + 1 Seat + 1 Back</div>
+                                <div class="machine-recipe">Needs: 4 Legs + 1 Seat + 1 Back</div>
                                 <div class="production-count">Chairs: <span id="count6">0</span></div>
                                 <div class="machine-status" id="status6">Running</div>
                             </div>

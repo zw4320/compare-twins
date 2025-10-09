@@ -38,12 +38,12 @@ let simulation = {
     
     // Production rates (units per second)
     rates: {
-        machine1: 5,  // Bolts
-        machine2: 5,  // Rods
-        machine3: 3,  // Legs (fixed rate)
-        machine4: 3,  // Seats
-        machine5: 3,  // Backs
-        machine6: 2   // Chairs (fixed rate)
+        machine1: 2,    // Bolts (reduced from 5)
+        machine2: 1,    // Rods (reduced from 5)
+        machine3: 0.5,  // Legs (reduced from 3)
+        machine4: 0.5,  // Seats (reduced from 3)
+        machine5: 0.5,  // Backs (reduced from 3)
+        machine6: 0.2   // Chairs (reduced from 2)
     },
     
     // Inventory/buffers
@@ -167,19 +167,19 @@ function updateSimulation() {
         simulation.accumulator.machine2 -= rodsProduced;
     }
     
-    // Machine 3: Produce legs (needs 2 bolts + 1 rod)
+    // Machine 3: Produce legs (needs 8 bolts + 4 rods)
     simulation.accumulator.machine3 += simulation.rates.machine3 * deltaTime;
     if (simulation.accumulator.machine3 >= 1) {
         const legsWanted = Math.floor(simulation.accumulator.machine3);
         const legsCanMake = Math.min(
             legsWanted,
-            Math.floor(simulation.inventory.bolts / 2),
-            simulation.inventory.rods
+            Math.floor(simulation.inventory.bolts / 8),
+            Math.floor(simulation.inventory.rods / 4)
         );
         
         if (legsCanMake > 0) {
-            simulation.inventory.bolts -= legsCanMake * 2;
-            simulation.inventory.rods -= legsCanMake;
+            simulation.inventory.bolts -= legsCanMake * 8;
+            simulation.inventory.rods -= legsCanMake * 4;
             simulation.inventory.legs += legsCanMake;
             simulation.produced.machine3 += legsCanMake;
             simulation.accumulator.machine3 -= legsCanMake;
@@ -207,19 +207,19 @@ function updateSimulation() {
         simulation.accumulator.machine5 -= backsProduced;
     }
     
-    // Machine 6: Produce chairs (needs 1 leg + 1 seat + 1 back)
+    // Machine 6: Produce chairs (needs 4 legs + 1 seat + 1 back)
     simulation.accumulator.machine6 += simulation.rates.machine6 * deltaTime;
     if (simulation.accumulator.machine6 >= 1) {
         const chairsWanted = Math.floor(simulation.accumulator.machine6);
         const chairsCanMake = Math.min(
             chairsWanted,
-            simulation.inventory.legs,
+            Math.floor(simulation.inventory.legs / 4),
             simulation.inventory.seats,
             simulation.inventory.backs
         );
         
         if (chairsCanMake > 0) {
-            simulation.inventory.legs -= chairsCanMake;
+            simulation.inventory.legs -= chairsCanMake * 4;
             simulation.inventory.seats -= chairsCanMake;
             simulation.inventory.backs -= chairsCanMake;
             simulation.produced.machine6 += chairsCanMake;
