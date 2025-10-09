@@ -41,8 +41,8 @@ let simulation = {
         machine1: 2,    // Bolts
         machine2: 2,    // Rods
         machine3: 0.5,  // Legs (fixed rate)
-        machine4: 2,    // Seats
-        machine5: 2,    // Backs
+        machine4: 0.5,  // Seats (0.5 = 1 every 2 seconds)
+        machine5: 0.5,  // Backs (0.5 = 1 every 2 seconds)
         machine6: 0.2   // Chairs (fixed rate)
     },
     
@@ -124,7 +124,7 @@ function setupRateControls() {
     if (machine4Slider) {
         machine4Slider.addEventListener('input', function() {
             simulation.rates.machine4 = parseFloat(this.value);
-            document.getElementById('rate4').textContent = this.value;
+            document.getElementById('rate4').textContent = formatSlowRate(this.value);
         });
     }
     
@@ -133,8 +133,19 @@ function setupRateControls() {
     if (machine5Slider) {
         machine5Slider.addEventListener('input', function() {
             simulation.rates.machine5 = parseFloat(this.value);
-            document.getElementById('rate5').textContent = this.value;
+            document.getElementById('rate5').textContent = formatSlowRate(this.value);
         });
+    }
+}
+
+function formatSlowRate(rate) {
+    const seconds = 1 / rate;
+    if (seconds === 1) {
+        return '1 every 1 sec';
+    } else if (seconds % 1 === 0) {
+        return '1 every ' + seconds + ' sec';
+    } else {
+        return rate.toFixed(3) + ' units/sec';
     }
 }
 
