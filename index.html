@@ -408,6 +408,141 @@
             color: #fbbf24;
         }
 
+        /* Pricing Cards */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid #2563eb;
+            transform: scale(1.05);
+        }
+
+        .pricing-badge {
+            background: #2563eb;
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-period {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #555;
+        }
+
+        .pricing-features li:before {
+            content: "✓ ";
+            color: #2563eb;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .pricing-button {
+            background: #2563eb;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            transition: background 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .pricing-button:hover {
+            background: #1e3a8a;
+        }
+
+        .pricing-button.secondary {
+            background: white;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+        }
+
+        .pricing-button.secondary:hover {
+            background: #eff6ff;
+        }
+
+        /* Benefits Section */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            border-left: 4px solid #2563eb;
+        }
+
+        .benefit-item h3 {
+            color: #1e3a8a;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+        }
+
         /* Footer */
         footer {
             background: #333;
@@ -474,22 +609,32 @@
                     <div class="feature-card">
                         <div class="feature-icon">🔄</div>
                         <h3>Real-Time Simulation</h3>
-                        <p>Content placeholder for real-time simulation features</p>
+                        <p>Create virtual replicas of physical assets and processes that update in real-time, enabling you to test scenarios without disrupting operations.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">📊</div>
                         <h3>Data Analytics</h3>
-                        <p>Content placeholder for data analytics capabilities</p>
+                        <p>Harness the power of IoT sensors and data streams to gain deep insights into performance, efficiency, and potential issues before they occur.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">⚙️</div>
-                        <h3>Optimization</h3>
-                        <p>Content placeholder for optimization benefits</p>
+                        <h3>Process Optimization</h3>
+                        <p>Identify bottlenecks, optimize workflows, and improve production efficiency by 20-30% through continuous simulation and analysis.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">🔮</div>
                         <h3>Predictive Maintenance</h3>
-                        <p>Content placeholder for predictive maintenance</p>
+                        <p>Reduce downtime by up to 50% with AI-powered predictions that alert you to equipment failures before they happen.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3>Cost Reduction</h3>
+                        <p>Decrease operational costs by 15-25% through optimized resource allocation, reduced waste, and improved energy efficiency.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Risk Mitigation</h3>
+                        <p>Test changes and new processes in a virtual environment to identify risks and validate solutions before implementation.</p>
                     </div>
                 </div>
             </div>
@@ -776,10 +921,74 @@
         <!-- Who Uses Them Page -->
         <section id="who-uses" class="page-section content-section">
             <div class="container">
-                <h2>Who Uses Them</h2>
-                <div class="content-placeholder">
-                    <h3>Content Coming Soon</h3>
-                    <p>This section will showcase industries and companies using Digital Twins</p>
+                <h2>Industries Using Digital Twins</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    From Fortune 500 companies to innovative startups, organizations across every industry are leveraging digital twin technology to transform their operations.
+                </p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏭</div>
+                        <h3>Manufacturing</h3>
+                        <p><strong>Use Case:</strong> Production line optimization, quality control, and predictive maintenance.</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #888;">Companies like Siemens and GE use digital twins to reduce downtime by 40%.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🏥</div>
+                        <h3>Healthcare</h3>
+                        <p><strong>Use Case:</strong> Patient monitoring, hospital operations, and medical device testing.</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #888;">Personalized treatment plans and surgical simulations improve patient outcomes.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🏙️</div>
+                        <h3>Smart Cities</h3>
+                        <p><strong>Use Case:</strong> Traffic management, energy optimization, and infrastructure planning.</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #888;">Singapore's virtual city model helps optimize urban planning decisions.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Energy & Utilities</h3>
+                        <p><strong>Use Case:</strong> Power grid monitoring, renewable energy optimization, and asset management.</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #888;">Wind farms increase efficiency by 20% through predictive modeling.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">✈️</div>
+                        <h3>Aerospace</h3>
+                        <p><strong>Use Case:</strong> Aircraft design, maintenance scheduling, and flight simulations.</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #888;">NASA and Boeing reduce development costs by testing virtually.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🚗</div>
+                        <h3>Automotive</h3>
+                        <p><strong>Use Case:</strong> Vehicle design, autonomous driving testing, and supply chain optimization.</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #888;">Tesla and BMW accelerate innovation through virtual prototyping.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🏢</div>
+                        <h3>Real Estate</h3>
+                        <p><strong>Use Case:</strong> Building management, energy optimization, and tenant experience.</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #888;">Smart buildings reduce energy costs by 30% with real-time monitoring.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🚢</div>
+                        <h3>Supply Chain</h3>
+                        <p><strong>Use Case:</strong> Logistics optimization, warehouse management, and demand forecasting.</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #888;">Amazon and DHL improve delivery times and reduce costs.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🌾</div>
+                        <h3>Agriculture</h3>
+                        <p><strong>Use Case:</strong> Crop monitoring, irrigation optimization, and yield prediction.</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #888;">Precision farming increases crop yields by 15-25%.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -787,10 +996,75 @@
         <!-- Pricing Page -->
         <section id="pricing" class="page-section content-section">
             <div class="container">
-                <h2>Pricing</h2>
-                <div class="content-placeholder">
-                    <h3>Content Coming Soon</h3>
-                    <p>This section will display pricing plans and packages</p>
+                <h2>Flexible Pricing Plans</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Choose the plan that fits your organization's needs. All plans include 24/7 support and regular updates.
+                </p>
+
+                <div class="pricing-grid">
+                    <!-- Starter Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-title">Starter</div>
+                        <div class="pricing-price">$2,499</div>
+                        <div class="pricing-period">per month</div>
+                        <ul class="pricing-features">
+                            <li>Up to 5 digital twins</li>
+                            <li>Real-time monitoring</li>
+                            <li>Basic analytics dashboard</li>
+                            <li>Email support</li>
+                            <li>1 GB data storage</li>
+                            <li>Monthly reports</li>
+                            <li>API access</li>
+                        </ul>
+                        <button class="pricing-button secondary" onclick="showPage('where-to-buy')">Get Started</button>
+                    </div>
+
+                    <!-- Professional Plan (Featured) -->
+                    <div class="pricing-card featured">
+                        <div class="pricing-badge">MOST POPULAR</div>
+                        <div class="pricing-title">Professional</div>
+                        <div class="pricing-price">$6,999</div>
+                        <div class="pricing-period">per month</div>
+                        <ul class="pricing-features">
+                            <li>Up to 25 digital twins</li>
+                            <li>Real-time monitoring & alerts</li>
+                            <li>Advanced analytics & AI insights</li>
+                            <li>Priority 24/7 support</li>
+                            <li>10 GB data storage</li>
+                            <li>Weekly reports & dashboards</li>
+                            <li>Full API & integration support</li>
+                            <li>Predictive maintenance</li>
+                            <li>Custom workflows</li>
+                        </ul>
+                        <button class="pricing-button" onclick="showPage('where-to-buy')">Get Started</button>
+                    </div>
+
+                    <!-- Enterprise Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-title">Enterprise</div>
+                        <div class="pricing-price">Custom</div>
+                        <div class="pricing-period">tailored to your needs</div>
+                        <ul class="pricing-features">
+                            <li>Unlimited digital twins</li>
+                            <li>Real-time monitoring & advanced alerts</li>
+                            <li>AI-powered predictive analytics</li>
+                            <li>Dedicated support team</li>
+                            <li>Unlimited data storage</li>
+                            <li>Real-time custom dashboards</li>
+                            <li>White-label solutions</li>
+                            <li>On-premise deployment option</li>
+                            <li>Custom integrations</li>
+                            <li>Training & onboarding</li>
+                            <li>SLA guarantees</li>
+                        </ul>
+                        <button class="pricing-button" onclick="showPage('where-to-buy')">Contact Sales</button>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #eff6ff; border-radius: 15px;">
+                    <h3 style="color: #1e3a8a; margin-bottom: 1rem;">Not sure which plan is right for you?</h3>
+                    <p style="color: #666; margin-bottom: 1.5rem;">Schedule a free consultation with our digital twin experts to find the perfect solution.</p>
+                    <button class="pricing-button" onclick="showPage('where-to-buy')">Schedule Consultation</button>
                 </div>
             </div>
         </section>
@@ -798,10 +1072,89 @@
         <!-- Benefits Page -->
         <section id="benefits" class="page-section content-section">
             <div class="container">
-                <h2>Benefits</h2>
-                <div class="content-placeholder">
-                    <h3>Content Coming Soon</h3>
-                    <p>This section will highlight the benefits of implementing Digital Twins</p>
+                <h2>Transform Your Business with Digital Twins</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Digital twin technology delivers measurable ROI across every aspect of your operations. Here's how leading organizations are benefiting.
+                </p>
+
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <h3><span class="benefit-icon">📈</span> Increased Efficiency</h3>
+                        <p><strong>20-30% improvement in operational efficiency</strong></p>
+                        <p>Real-time monitoring and optimization allow you to identify and eliminate inefficiencies instantly. Digital twins provide complete visibility into your operations, enabling data-driven decisions that maximize productivity.</p>
+                        <p style="margin-top: 1rem; padding: 1rem; background: #eff6ff; border-radius: 8px; font-size: 0.9rem;">
+                            <strong>Example:</strong> A manufacturing plant reduced cycle time by 25% by optimizing machine scheduling and identifying bottlenecks through their digital twin.
+                        </p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <h3><span class="benefit-icon">💰</span> Cost Reduction</h3>
+                        <p><strong>15-25% decrease in operational costs</strong></p>
+                        <p>Reduce waste, optimize energy consumption, and minimize downtime. Predictive maintenance prevents costly equipment failures, while simulation capabilities allow you to test changes before implementation.</p>
+                        <p style="margin-top: 1rem; padding: 1rem; background: #eff6ff; border-radius: 8px; font-size: 0.9rem;">
+                            <strong>ROI:</strong> Most organizations see full ROI within 12-18 months of implementation, with ongoing savings year after year.
+                        </p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <h3><span class="benefit-icon">⚡</span> Reduced Downtime</h3>
+                        <p><strong>Up to 50% reduction in unplanned downtime</strong></p>
+                        <p>Predictive analytics forecast equipment failures before they occur, allowing scheduled maintenance during off-peak hours. Real-time alerts ensure rapid response to any issues that do arise.</p>
+                        <p style="margin-top: 1rem; padding: 1rem; background: #eff6ff; border-radius: 8px; font-size: 0.9rem;">
+                            <strong>Impact:</strong> Energy companies have reduced turbine downtime by 40%, saving millions in lost production.
+                        </p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <h3><span class="benefit-icon">🎯</span> Better Decision Making</h3>
+                        <p><strong>Real-time insights for strategic planning</strong></p>
+                        <p>Access to comprehensive, real-time data enables faster, more informed decision-making. Simulation capabilities allow you to test "what-if" scenarios and visualize outcomes before committing resources.</p>
+                        <p style="margin-top: 1rem; padding: 1rem; background: #eff6ff; border-radius: 8px; font-size: 0.9rem;">
+                            <strong>Benefit:</strong> Leadership teams can confidently make strategic decisions backed by accurate, real-time operational data.
+                        </p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <h3><span class="benefit-icon">🔒</span> Risk Mitigation</h3>
+                        <p><strong>Minimize operational and financial risks</strong></p>
+                        <p>Test new processes, equipment configurations, and operational changes in a virtual environment before implementation. Identify potential issues, safety hazards, and compliance concerns without real-world consequences.</p>
+                        <p style="margin-top: 1rem; padding: 1rem; background: #eff6ff; border-radius: 8px; font-size: 0.9rem;">
+                            <strong>Safety:</strong> Aerospace companies simulate thousands of scenarios to ensure safety before physical testing.
+                        </p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <h3><span class="benefit-icon">🚀</span> Faster Innovation</h3>
+                        <p><strong>Accelerate product development by 30-40%</strong></p>
+                        <p>Virtual prototyping and testing dramatically reduce development cycles. Iterate quickly on designs, test performance under various conditions, and optimize before manufacturing physical prototypes.</p>
+                        <p style="margin-top: 1rem; padding: 1rem; background: #eff6ff; border-radius: 8px; font-size: 0.9rem;">
+                            <strong>Speed:</strong> Automotive manufacturers reduce design-to-production time by months using digital twin simulations.
+                        </p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <h3><span class="benefit-icon">🌱</span> Sustainability</h3>
+                        <p><strong>20-30% reduction in energy consumption</strong></p>
+                        <p>Optimize energy usage, reduce waste, and minimize environmental impact. Monitor carbon footprint in real-time and identify opportunities for sustainable practices throughout your operations.</p>
+                        <p style="margin-top: 1rem; padding: 1rem; background: #eff6ff; border-radius: 8px; font-size: 0.9rem;">
+                            <strong>Green Impact:</strong> Smart buildings using digital twins reduce energy costs by up to 30% while improving occupant comfort.
+                        </p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <h3><span class="benefit-icon">📊</span> Data-Driven Culture</h3>
+                        <p><strong>Transform operations with actionable insights</strong></p>
+                        <p>Build a culture of continuous improvement with accessible, visual data. Empower teams at all levels with insights they can understand and act upon, fostering accountability and innovation.</p>
+                        <p style="margin-top: 1rem; padding: 1rem; background: #eff6ff; border-radius: 8px; font-size: 0.9rem;">
+                            <strong>Engagement:</strong> Organizations report 35% higher employee engagement when teams have access to real-time performance data.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 4rem; padding: 3rem; background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); border-radius: 20px; color: white;">
+                    <h3 style="font-size: 2rem; margin-bottom: 1rem;">Ready to Transform Your Operations?</h3>
+                    <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">Join thousands of organizations already benefiting from digital twin technology.</p>
+                    <button class="cta-button" onclick="showPage('where-to-buy')" style="background: white; color: #2563eb;">Get Started Today</button>
                 </div>
             </div>
         </section>
@@ -809,10 +1162,134 @@
         <!-- Where to Buy Page -->
         <section id="where-to-buy" class="page-section content-section">
             <div class="container">
-                <h2>Where to Buy</h2>
-                <div class="content-placeholder">
-                    <h3>Content Coming Soon</h3>
-                    <p>This section will provide information on purchasing Digital Twin solutions</p>
+                <h2>Get Started with Digital Twins</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Transform your operations in just a few simple steps. Our team will guide you through every stage of implementation.
+                </p>
+
+                <div style="max-width: 900px; margin: 0 auto 4rem;">
+                    <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 5px 25px rgba(0,0,0,0.1);">
+                        <h3 style="color: #1e3a8a; margin-bottom: 2rem; text-align: center; font-size: 1.8rem;">Your Implementation Journey</h3>
+
+                        <div style="display: grid; gap: 2rem;">
+                            <!-- Step 1 -->
+                            <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                                <div style="background: #2563eb; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; flex-shrink: 0;">1</div>
+                                <div>
+                                    <h4 style="color: #1e3a8a; margin-bottom: 0.5rem; font-size: 1.3rem;">Discovery Call</h4>
+                                    <p style="color: #666; margin-bottom: 0.5rem;">Schedule a free 30-minute consultation with our experts to discuss your needs and goals.</p>
+                                    <p style="color: #2563eb; font-size: 0.9rem;"><strong>Timeline:</strong> Same day or next business day</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                                <div style="background: #2563eb; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; flex-shrink: 0;">2</div>
+                                <div>
+                                    <h4 style="color: #1e3a8a; margin-bottom: 0.5rem; font-size: 1.3rem;">Assessment & Planning</h4>
+                                    <p style="color: #666; margin-bottom: 0.5rem;">We analyze your current operations, identify opportunities, and create a customized implementation roadmap.</p>
+                                    <p style="color: #2563eb; font-size: 0.9rem;"><strong>Timeline:</strong> 1-2 weeks</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                                <div style="background: #2563eb; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; flex-shrink: 0;">3</div>
+                                <div>
+                                    <h4 style="color: #1e3a8a; margin-bottom: 0.5rem; font-size: 1.3rem;">Pilot Program</h4>
+                                    <p style="color: #666; margin-bottom: 0.5rem;">Start small with a pilot digital twin to demonstrate value and refine the approach before full deployment.</p>
+                                    <p style="color: #2563eb; font-size: 0.9rem;"><strong>Timeline:</strong> 4-6 weeks</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                                <div style="background: #2563eb; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; flex-shrink: 0;">4</div>
+                                <div>
+                                    <h4 style="color: #1e3a8a; margin-bottom: 0.5rem; font-size: 1.3rem;">Full Deployment</h4>
+                                    <p style="color: #666; margin-bottom: 0.5rem;">Scale across your organization with comprehensive training, integration, and ongoing support.</p>
+                                    <p style="color: #2563eb; font-size: 0.9rem;"><strong>Timeline:</strong> 2-3 months</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 5 -->
+                            <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                                <div style="background: #2563eb; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; flex-shrink: 0;">5</div>
+                                <div>
+                                    <h4 style="color: #1e3a8a; margin-bottom: 0.5rem; font-size: 1.3rem;">Optimization & Growth</h4>
+                                    <p style="color: #666; margin-bottom: 0.5rem;">Continuous improvement with regular reviews, updates, and expansion to new use cases.</p>
+                                    <p style="color: #2563eb; font-size: 0.9rem;"><strong>Timeline:</strong> Ongoing</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card" style="text-align: center;">
+                        <div class="feature-icon">📞</div>
+                        <h3>Schedule a Call</h3>
+                        <p>Talk to our solutions team to discuss your specific needs and get personalized recommendations.</p>
+                        <p style="margin-top: 1rem;"><strong>sales@digitaltwins.com</strong></p>
+                        <p style="color: #2563eb;">+1 (555) 123-4567</p>
+                    </div>
+
+                    <div class="feature-card" style="text-align: center;">
+                        <div class="feature-icon">📧</div>
+                        <h3>Request a Demo</h3>
+                        <p>See our platform in action with a live demonstration customized to your industry and use case.</p>
+                        <p style="margin-top: 1rem;"><strong>demo@digitaltwins.com</strong></p>
+                        <p style="color: #2563eb;">Free 45-minute session</p>
+                    </div>
+
+                    <div class="feature-card" style="text-align: center;">
+                        <div class="feature-icon">💼</div>
+                        <h3>Enterprise Solutions</h3>
+                        <p>Custom enterprise packages with dedicated support, training, and integration services.</p>
+                        <p style="margin-top: 1rem;"><strong>enterprise@digitaltwins.com</strong></p>
+                        <p style="color: #2563eb;">White-glove service</p>
+                    </div>
+
+                    <div class="feature-card" style="text-align: center;">
+                        <div class="feature-icon">🎓</div>
+                        <h3>Training & Support</h3>
+                        <p>Comprehensive training programs and 24/7 technical support to ensure your success.</p>
+                        <p style="margin-top: 1rem;"><strong>support@digitaltwins.com</strong></p>
+                        <p style="color: #2563eb;">Available 24/7</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 4rem; padding: 3rem; background: #eff6ff; border-radius: 20px;">
+                    <h3 style="color: #1e3a8a; font-size: 2rem; margin-bottom: 1rem;">Ready to Get Started?</h3>
+                    <p style="color: #666; font-size: 1.1rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                        Join leading organizations worldwide who are already transforming their operations with digital twin technology.
+                    </p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button class="pricing-button" onclick="window.location.href='mailto:sales@digitaltwins.com'">Contact Sales</button>
+                        <button class="pricing-button secondary" onclick="showPage('information')">Try Interactive Demo</button>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem; padding: 2rem; border-top: 2px solid #e5e7eb;">
+                    <h3 style="color: #1e3a8a; text-align: center; margin-bottom: 2rem;">Frequently Asked Questions</h3>
+                    <div style="max-width: 800px; margin: 0 auto; display: grid; gap: 1.5rem;">
+                        <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                            <h4 style="color: #2563eb; margin-bottom: 0.5rem;">How long does implementation take?</h4>
+                            <p style="color: #666;">A pilot program can be deployed in 4-6 weeks. Full enterprise deployment typically takes 2-3 months, depending on scope and complexity.</p>
+                        </div>
+                        <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                            <h4 style="color: #2563eb; margin-bottom: 0.5rem;">What's the ROI timeline?</h4>
+                            <p style="color: #666;">Most organizations see positive ROI within 12-18 months, with ongoing benefits and cost savings continuing year after year.</p>
+                        </div>
+                        <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                            <h4 style="color: #2563eb; margin-bottom: 0.5rem;">Do you integrate with existing systems?</h4>
+                            <p style="color: #666;">Yes! Our platform integrates with major ERP, MES, SCADA, and IoT systems. We provide full API access and custom integration support.</p>
+                        </div>
+                        <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                            <h4 style="color: #2563eb; margin-bottom: 0.5rem;">Is training included?</h4>
+                            <p style="color: #666;">All plans include comprehensive training. Professional and Enterprise plans include dedicated onboarding sessions and ongoing training programs.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
