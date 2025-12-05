@@ -90,6 +90,7 @@ let simulation = {
     // Accumulator for partial production
     accumulator: {
         rawMaterial: 0,
+        rawWood: 0,
         machine1: 0,
         machine2: 0,
         machine3: 0,
@@ -229,14 +230,27 @@ function updateSimulation() {
 
     // Stage 1: Raw Material Supply - produces steel and wood
     const rawRate = simulation.controls.rawMaterialRate;
-    simulation.accumulator.rawMaterial += rawRate * deltaTime;
+    const steelRate = rawRate * 0.6;  // 60% goes to steel
+    const woodRate = rawRate * 0.4;   // 40% goes to wood
+
+    // Accumulate steel separately
+    simulation.accumulator.rawMaterial += steelRate * deltaTime;
     if (simulation.accumulator.rawMaterial >= 1) {
-        const materialsProduced = Math.floor(simulation.accumulator.rawMaterial);
-        simulation.inventory.steel += Math.floor(materialsProduced * 0.6); // 60% steel
-        simulation.inventory.wood += Math.floor(materialsProduced * 0.4);  // 40% wood
-        simulation.produced.rawMaterial += materialsProduced;
-        simulation.accumulator.rawMaterial -= materialsProduced;
+        const steelProduced = Math.floor(simulation.accumulator.rawMaterial);
+        simulation.inventory.steel += steelProduced;
+        simulation.accumulator.rawMaterial -= steelProduced;
     }
+
+    // Accumulate wood separately (reuse machine1 accumulator slot for wood)
+    if (!simulation.accumulator.rawWood) simulation.accumulator.rawWood = 0;
+    simulation.accumulator.rawWood += woodRate * deltaTime;
+    if (simulation.accumulator.rawWood >= 1) {
+        const woodProduced = Math.floor(simulation.accumulator.rawWood);
+        simulation.inventory.wood += woodProduced;
+        simulation.accumulator.rawWood -= woodProduced;
+    }
+
+    simulation.produced.rawMaterial += rawRate * deltaTime;
 
     // Stage 2: Metal Shop - Machine 1 (Bolts)
     const boltRate = getEffectiveRate('bolt', simulation.controls.metalShopSpeed);
@@ -554,6 +568,7 @@ function resetSimulation() {
 
     simulation.accumulator = {
         rawMaterial: 0,
+        rawWood: 0,
         machine1: 0,
         machine2: 0,
         machine3: 0,
