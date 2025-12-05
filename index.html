@@ -19,7 +19,7 @@
 
         /* Header and Navigation */
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
             color: white;
             padding: 1rem 0;
             position: fixed;
@@ -92,7 +92,7 @@
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
-            color: #667eea;
+            color: #ff6b6b;
         }
 
         .hero p {
@@ -103,7 +103,7 @@
 
         .cta-button {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
             color: white;
             padding: 1rem 2rem;
             border-radius: 50px;
@@ -114,7 +114,7 @@
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
         }
 
         .feature-grid {
@@ -144,7 +144,7 @@
 
         .feature-card h3 {
             margin-bottom: 1rem;
-            color: #667eea;
+            color: #ff6b6b;
         }
 
         /* Content Sections */
@@ -155,7 +155,7 @@
         .content-section h2 {
             font-size: 2.5rem;
             margin-bottom: 2rem;
-            color: #667eea;
+            color: #ff6b6b;
             text-align: center;
         }
 
@@ -180,7 +180,7 @@
 
         .control-panel h3 {
             text-align: center;
-            color: #667eea;
+            color: #ff6b6b;
             margin-bottom: 1.5rem;
         }
 
@@ -215,12 +215,12 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #667eea;
+            background: #ff6b6b;
             cursor: pointer;
         }
 
         .reset-button {
-            background: #667eea;
+            background: #ff6b6b;
             color: white;
             border: none;
             padding: 0.75rem 2rem;
@@ -231,13 +231,13 @@
         }
 
         .reset-button:hover {
-            background: #764ba2;
+            background: #ee5a24;
         }
 
         .stats-panel {
             display: flex;
             justify-content: space-around;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
             padding: 2rem;
             border-radius: 10px;
             margin-bottom: 2rem;
@@ -296,7 +296,7 @@
 
         .flow-arrow {
             font-size: 2rem;
-            color: #667eea;
+            color: #ff6b6b;
             flex-shrink: 0;
         }
 
@@ -308,7 +308,7 @@
         }
 
         .stage-label {
-            background: #667eea;
+            background: #ff6b6b;
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 20px;
@@ -317,7 +317,7 @@
         }
 
         .machine-header {
-            background: #667eea;
+            background: #ff6b6b;
             color: white;
             padding: 0.5rem;
             text-align: center;
@@ -348,7 +348,7 @@
 
         .production-count {
             font-size: 0.9rem;
-            color: #667eea;
+            color: #ff6b6b;
             font-weight: 600;
         }
 
@@ -397,7 +397,7 @@
         .buffer-amount {
             font-size: 1.3rem;
             font-weight: bold;
-            color: #667eea;
+            color: #ff6b6b;
         }
 
         .buffer-amount.high {
@@ -508,8 +508,8 @@
                     <h3>Production Controls</h3>
                     <div class="controls-grid">
                         <div class="control-item">
-                            <label>Raw Material Supply: <span id="rate-raw">3</span> units/sec</label>
-                            <input type="range" id="raw-material-rate" min="1" max="5" value="3" step="0.5">
+                            <label>Raw Material Supply: <span id="rate-raw">5</span> units/sec</label>
+                            <input type="range" id="raw-material-rate" min="1" max="8" value="5" step="0.5">
                         </div>
                         <div class="control-item">
                             <label>Metal Shop Speed: <span id="rate-metal">100</span>%</label>
@@ -538,11 +538,11 @@
                 </div>
 
                 <!-- Control Information Panel -->
-                <div style="background: #e8eaf6; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; border-left: 4px solid #667eea;">
-                    <h4 style="color: #667eea; margin-bottom: 1rem; font-size: 1.1rem;">ℹ️ Control Information</h4>
+                <div style="background: #ffe8e8; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; border-left: 4px solid #ff6b6b;">
+                    <h4 style="color: #ff6b6b; margin-bottom: 1rem; font-size: 1.1rem;">ℹ️ Control Information</h4>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; font-size: 0.9rem; line-height: 1.6;">
                         <div>
-                            <strong style="color: #667eea;">Quality Control:</strong>
+                            <strong style="color: #ff6b6b;">Quality Control:</strong>
                             <ul style="margin: 0.5rem 0 0 1.5rem; color: #555;">
                                 <li><strong>Fast:</strong> 20% faster production, 15% defect rate</li>
                                 <li><strong>Standard:</strong> Normal speed, 5% defect rate</li>
@@ -550,7 +550,7 @@
                             </ul>
                         </div>
                         <div>
-                            <strong style="color: #667eea;">Maintenance Mode:</strong>
+                            <strong style="color: #ff6b6b;">Maintenance Mode:</strong>
                             <ul style="margin: 0.5rem 0 0 1.5rem; color: #555;">
                                 <li><strong>Normal:</strong> Full production speed</li>
                                 <li><strong>Maintenance:</strong> 50% slower speed, but defect rate reduced by 70%</li>

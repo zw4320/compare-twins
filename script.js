@@ -38,7 +38,7 @@ let simulation = {
 
     // Control settings
     controls: {
-        rawMaterialRate: 3,      // units per second
+        rawMaterialRate: 5,      // units per second (increased for better flow)
         metalShopSpeed: 100,     // percentage
         woodShopSpeed: 100,      // percentage
         assemblySpeed: 100,      // percentage
@@ -230,8 +230,8 @@ function updateSimulation() {
 
     // Stage 1: Raw Material Supply - produces steel and wood
     const rawRate = simulation.controls.rawMaterialRate;
-    const steelRate = rawRate * 0.6;  // 60% goes to steel
-    const woodRate = rawRate * 0.4;   // 40% goes to wood
+    const steelRate = rawRate * 0.7;  // 70% goes to steel (increased for metal shop)
+    const woodRate = rawRate * 0.3;   // 30% goes to wood
 
     // Accumulate steel separately
     simulation.accumulator.rawMaterial += steelRate * deltaTime;
@@ -394,7 +394,7 @@ function updateSimulation() {
 
 function updateDisplay() {
     // Update production counts
-    updateElement('count-raw', simulation.produced.rawMaterial);
+    updateElement('count-raw', Math.floor(simulation.produced.rawMaterial));
     updateElement('count1', simulation.produced.machine1);
     updateElement('count2', simulation.produced.machine2);
     updateElement('count3', simulation.produced.machine3);
