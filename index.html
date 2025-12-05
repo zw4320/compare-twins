@@ -264,21 +264,24 @@
             padding: 2rem;
             border-radius: 10px;
             margin-top: 2rem;
+            overflow-x: auto;
         }
 
         .machine-row {
             display: flex;
-            justify-content: space-around;
+            justify-content: flex-start;
             align-items: center;
-            margin: 2rem 0;
-            gap: 2rem;
+            gap: 1rem;
+            min-width: max-content;
+            padding: 1rem 0;
         }
 
         .machine {
             background: white;
             border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            width: 200px;
+            width: 180px;
+            flex-shrink: 0;
             overflow: hidden;
             transition: transform 0.3s ease;
         }
@@ -288,7 +291,29 @@
         }
 
         .machine-large {
-            width: 250px;
+            width: 220px;
+        }
+
+        .flow-arrow {
+            font-size: 2rem;
+            color: #667eea;
+            flex-shrink: 0;
+        }
+
+        .production-stage {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .stage-label {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
         }
 
         .machine-header {
@@ -347,28 +372,30 @@
 
         .buffer-row {
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            gap: 4rem;
-            margin: 1rem 0;
+            gap: 0.5rem;
+            margin: 0;
         }
 
         .inventory-buffer, .inventory-buffer-center {
             background: white;
-            padding: 1rem 2rem;
+            padding: 0.75rem 1rem;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             text-align: center;
-            min-width: 150px;
+            min-width: 100px;
+            flex-shrink: 0;
         }
 
         .buffer-label {
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             color: #666;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
         }
 
         .buffer-amount {
-            font-size: 1.8rem;
+            font-size: 1.3rem;
             font-weight: bold;
             color: #667eea;
         }
@@ -481,20 +508,28 @@
                     <h3>Production Controls</h3>
                     <div class="controls-grid">
                         <div class="control-item">
-                            <label>Machine 1 (Bolts): <span id="rate1">2</span> units/sec</label>
-                            <input type="range" id="machine1-rate" min="1" max="4" value="2" step="1">
+                            <label>Raw Material Supply: <span id="rate-raw">3</span> units/sec</label>
+                            <input type="range" id="raw-material-rate" min="1" max="5" value="3" step="0.5">
                         </div>
                         <div class="control-item">
-                            <label>Machine 2 (Rods): <span id="rate2">2</span> units/sec</label>
-                            <input type="range" id="machine2-rate" min="1" max="4" value="2" step="1">
+                            <label>Metal Shop Speed: <span id="rate-metal">100</span>%</label>
+                            <input type="range" id="metal-shop-rate" min="50" max="150" value="100" step="10">
                         </div>
                         <div class="control-item">
-                            <label>Machine 4 (Seats): <span id="rate4">1 every 2 sec</span></label>
-                            <input type="range" id="machine4-rate" min="0.125" max="1" value="0.5" step="0.125">
+                            <label>Wood Shop Speed: <span id="rate-wood">100</span>%</label>
+                            <input type="range" id="wood-shop-rate" min="50" max="150" value="100" step="10">
                         </div>
                         <div class="control-item">
-                            <label>Machine 5 (Backs): <span id="rate5">1 every 2 sec</span></label>
-                            <input type="range" id="machine5-rate" min="0.125" max="1" value="0.5" step="0.125">
+                            <label>Assembly Line Speed: <span id="rate-assembly">100</span>%</label>
+                            <input type="range" id="assembly-rate" min="50" max="150" value="100" step="10">
+                        </div>
+                        <div class="control-item">
+                            <label>Quality Control: <span id="quality-level">Standard</span></label>
+                            <input type="range" id="quality-control" min="1" max="3" value="2" step="1">
+                        </div>
+                        <div class="control-item">
+                            <label>Maintenance Mode: <span id="maintenance-mode">Normal</span></label>
+                            <input type="range" id="maintenance-toggle" min="0" max="1" value="0" step="1">
                         </div>
                     </div>
                     <div style="text-align: center; margin-top: 1rem;">
@@ -520,105 +555,195 @@
 
                 <!-- Manufacturing Flow Diagram -->
                 <div class="manufacturing-flow">
-                    <!-- Row 1: Machines 1 & 2 -->
                     <div class="machine-row">
-                        <div class="machine" id="machine1">
-                            <div class="machine-header">Machine 1</div>
-                            <div class="machine-body">
-                                <div class="machine-icon">🔩</div>
-                                <div class="machine-name">Bolt Maker</div>
-                                <div class="production-count">Produced: <span id="count1">0</span></div>
-                                <div class="machine-status">Running</div>
+                        <!-- Stage 1: Raw Materials -->
+                        <div class="production-stage">
+                            <div class="stage-label">Raw Materials</div>
+                            <div class="machine" id="machine-raw">
+                                <div class="machine-header">Supply</div>
+                                <div class="machine-body">
+                                    <div class="machine-icon">📦</div>
+                                    <div class="machine-name">Raw Materials</div>
+                                    <div class="production-count"><span id="count-raw">0</span></div>
+                                    <div class="machine-status">Running</div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="machine" id="machine2">
-                            <div class="machine-header">Machine 2</div>
-                            <div class="machine-body">
-                                <div class="machine-icon">📏</div>
-                                <div class="machine-name">Rod Maker</div>
-                                <div class="production-count">Produced: <span id="count2">0</span></div>
-                                <div class="machine-status">Running</div>
+                        <div class="flow-arrow">→</div>
+
+                        <!-- Buffers -->
+                        <div class="buffer-row">
+                            <div class="inventory-buffer">
+                                <div class="buffer-label">Steel</div>
+                                <div class="buffer-amount" id="steel-inventory">0</div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Inventory Buffers for Machine 3 -->
-                    <div class="buffer-row">
-                        <div class="inventory-buffer">
-                            <div class="buffer-label">Bolt Inventory</div>
-                            <div class="buffer-amount" id="bolt-inventory">0</div>
-                        </div>
-                        <div class="inventory-buffer">
-                            <div class="buffer-label">Rod Inventory</div>
-                            <div class="buffer-amount" id="rod-inventory">0</div>
-                        </div>
-                    </div>
-
-                    <!-- Row 2: Machine 3 -->
-                    <div class="machine-row" style="justify-content: center;">
-                        <div class="machine machine-large" id="machine3">
-                            <div class="machine-header">Machine 3</div>
-                            <div class="machine-body">
-                                <div class="machine-icon">🦵</div>
-                                <div class="machine-name">Leg Assembler</div>
-                                <div class="machine-recipe">Needs: 8 Bolts + 4 Rods</div>
-                                <div class="production-count">Produced: <span id="count3">0</span></div>
-                                <div class="machine-status" id="status3">Running</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Row 3: Machines 4 & 5 with Machine 3 inventory -->
-                    <div class="machine-row">
-                        <div class="machine" id="machine4">
-                            <div class="machine-header">Machine 4</div>
-                            <div class="machine-body">
-                                <div class="machine-icon">💺</div>
-                                <div class="machine-name">Seat Maker</div>
-                                <div class="production-count">Produced: <span id="count4">0</span></div>
-                                <div class="machine-status">Running</div>
+                            <div class="inventory-buffer">
+                                <div class="buffer-label">Wood</div>
+                                <div class="buffer-amount" id="wood-inventory">0</div>
                             </div>
                         </div>
 
-                        <div class="inventory-buffer-center">
-                            <div class="buffer-label">Leg Inventory</div>
-                            <div class="buffer-amount" id="leg-inventory">0</div>
-                        </div>
+                        <div class="flow-arrow">→</div>
 
-                        <div class="machine" id="machine5">
-                            <div class="machine-header">Machine 5</div>
-                            <div class="machine-body">
-                                <div class="machine-icon">🪑</div>
-                                <div class="machine-name">Back Maker</div>
-                                <div class="production-count">Produced: <span id="count5">0</span></div>
-                                <div class="machine-status">Running</div>
+                        <!-- Stage 2: Metal Shop -->
+                        <div class="production-stage">
+                            <div class="stage-label">Metal Shop</div>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <div class="machine" id="machine1">
+                                    <div class="machine-header">M1</div>
+                                    <div class="machine-body">
+                                        <div class="machine-icon">🔩</div>
+                                        <div class="machine-name">Bolts</div>
+                                        <div class="production-count"><span id="count1">0</span></div>
+                                        <div class="machine-status" id="status1">Running</div>
+                                    </div>
+                                </div>
+                                <div class="machine" id="machine2">
+                                    <div class="machine-header">M2</div>
+                                    <div class="machine-body">
+                                        <div class="machine-icon">📏</div>
+                                        <div class="machine-name">Rods</div>
+                                        <div class="production-count"><span id="count2">0</span></div>
+                                        <div class="machine-status" id="status2">Running</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Inventory Buffers for Machine 6 -->
-                    <div class="buffer-row">
-                        <div class="inventory-buffer">
-                            <div class="buffer-label">Seat Inventory</div>
-                            <div class="buffer-amount" id="seat-inventory">0</div>
-                        </div>
-                        <div class="inventory-buffer">
-                            <div class="buffer-label">Back Inventory</div>
-                            <div class="buffer-amount" id="back-inventory">0</div>
-                        </div>
-                    </div>
+                        <div class="flow-arrow">→</div>
 
-                    <!-- Row 4: Machine 6 -->
-                    <div class="machine-row" style="justify-content: center;">
-                        <div class="machine machine-large" id="machine6">
-                            <div class="machine-header">Machine 6</div>
-                            <div class="machine-body">
-                                <div class="machine-icon">🪑</div>
-                                <div class="machine-name">Chair Assembler</div>
-                                <div class="machine-recipe">Needs: 4 Legs + 1 Seat + 1 Back</div>
-                                <div class="production-count">Chairs: <span id="count6">0</span></div>
-                                <div class="machine-status" id="status6">Running</div>
+                        <!-- Metal Buffers -->
+                        <div class="buffer-row">
+                            <div class="inventory-buffer">
+                                <div class="buffer-label">Bolts</div>
+                                <div class="buffer-amount" id="bolt-inventory">0</div>
+                            </div>
+                            <div class="inventory-buffer">
+                                <div class="buffer-label">Rods</div>
+                                <div class="buffer-amount" id="rod-inventory">0</div>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow">→</div>
+
+                        <!-- Stage 3: Metal Assembly -->
+                        <div class="production-stage">
+                            <div class="stage-label">Metal Assembly</div>
+                            <div class="machine machine-large" id="machine3">
+                                <div class="machine-header">M3</div>
+                                <div class="machine-body">
+                                    <div class="machine-icon">🦵</div>
+                                    <div class="machine-name">Legs</div>
+                                    <div class="machine-recipe">8B + 4R</div>
+                                    <div class="production-count"><span id="count3">0</span></div>
+                                    <div class="machine-status" id="status3">Running</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow">→</div>
+
+                        <!-- Leg Buffer -->
+                        <div class="buffer-row">
+                            <div class="inventory-buffer">
+                                <div class="buffer-label">Legs</div>
+                                <div class="buffer-amount" id="leg-inventory">0</div>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow">→</div>
+
+                        <!-- Stage 4: Wood Shop -->
+                        <div class="production-stage">
+                            <div class="stage-label">Wood Shop</div>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <div class="machine" id="machine4">
+                                    <div class="machine-header">M4</div>
+                                    <div class="machine-body">
+                                        <div class="machine-icon">💺</div>
+                                        <div class="machine-name">Seats</div>
+                                        <div class="production-count"><span id="count4">0</span></div>
+                                        <div class="machine-status" id="status4">Running</div>
+                                    </div>
+                                </div>
+                                <div class="machine" id="machine5">
+                                    <div class="machine-header">M5</div>
+                                    <div class="machine-body">
+                                        <div class="machine-icon">🪑</div>
+                                        <div class="machine-name">Backs</div>
+                                        <div class="production-count"><span id="count5">0</span></div>
+                                        <div class="machine-status" id="status5">Running</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow">→</div>
+
+                        <!-- Wood Buffers -->
+                        <div class="buffer-row">
+                            <div class="inventory-buffer">
+                                <div class="buffer-label">Seats</div>
+                                <div class="buffer-amount" id="seat-inventory">0</div>
+                            </div>
+                            <div class="inventory-buffer">
+                                <div class="buffer-label">Backs</div>
+                                <div class="buffer-amount" id="back-inventory">0</div>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow">→</div>
+
+                        <!-- Stage 5: Assembly -->
+                        <div class="production-stage">
+                            <div class="stage-label">Assembly Line</div>
+                            <div class="machine machine-large" id="machine6">
+                                <div class="machine-header">M6</div>
+                                <div class="machine-body">
+                                    <div class="machine-icon">🪑</div>
+                                    <div class="machine-name">Assembly</div>
+                                    <div class="machine-recipe">4L+1S+1B</div>
+                                    <div class="production-count"><span id="count6">0</span></div>
+                                    <div class="machine-status" id="status6">Running</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow">→</div>
+
+                        <!-- Chair Buffer -->
+                        <div class="buffer-row">
+                            <div class="inventory-buffer">
+                                <div class="buffer-label">Assembled</div>
+                                <div class="buffer-amount" id="assembled-inventory">0</div>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow">→</div>
+
+                        <!-- Stage 6: Quality Control -->
+                        <div class="production-stage">
+                            <div class="stage-label">Quality Control</div>
+                            <div class="machine" id="machine-qc">
+                                <div class="machine-header">QC</div>
+                                <div class="machine-body">
+                                    <div class="machine-icon">✅</div>
+                                    <div class="machine-name">Inspector</div>
+                                    <div class="production-count"><span id="count-qc">0</span></div>
+                                    <div class="machine-status" id="status-qc">Running</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow">→</div>
+
+                        <!-- Final Output -->
+                        <div class="production-stage">
+                            <div class="stage-label">Finished</div>
+                            <div class="inventory-buffer">
+                                <div class="buffer-label">Chairs</div>
+                                <div class="buffer-amount" id="final-chairs">0</div>
                             </div>
                         </div>
                     </div>
