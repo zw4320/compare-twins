@@ -70,6 +70,18 @@ let simulation = {
         assembled: 0
     },
 
+    // Max capacity for each buffer
+    maxCapacity: {
+        steel: 100,
+        wood: 100,
+        bolts: 150,
+        rods: 150,
+        legs: 80,
+        seats: 80,
+        backs: 80,
+        assembled: 50
+    },
+
     // Production counters
     produced: {
         rawMaterial: 0,
@@ -233,36 +245,54 @@ function updateSimulation() {
     const steelRate = rawRate * 0.7;  // 70% goes to steel (increased for metal shop)
     const woodRate = rawRate * 0.3;   // 30% goes to wood
 
-    // Accumulate steel separately
+    // Accumulate steel separately - check capacity
     simulation.accumulator.rawMaterial += steelRate * deltaTime;
-    if (simulation.accumulator.rawMaterial >= 1) {
+    if (simulation.accumulator.rawMaterial >= 1 && simulation.inventory.steel < simulation.maxCapacity.steel) {
         const steelProduced = Math.floor(simulation.accumulator.rawMaterial);
-        simulation.inventory.steel += steelProduced;
-        simulation.accumulator.rawMaterial -= steelProduced;
+        const steelCanAdd = Math.min(steelProduced, simulation.maxCapacity.steel - simulation.inventory.steel);
+        simulation.inventory.steel += steelCanAdd;
+        simulation.accumulator.rawMaterial -= steelCanAdd;
     }
 
-    // Accumulate wood separately (reuse machine1 accumulator slot for wood)
+    // Accumulate wood separately - check capacity
     if (!simulation.accumulator.rawWood) simulation.accumulator.rawWood = 0;
     simulation.accumulator.rawWood += woodRate * deltaTime;
-    if (simulation.accumulator.rawWood >= 1) {
+    if (simulation.accumulator.rawWood >= 1 && simulation.inventory.wood < simulation.maxCapacity.wood) {
         const woodProduced = Math.floor(simulation.accumulator.rawWood);
-        simulation.inventory.wood += woodProduced;
-        simulation.accumulator.rawWood -= woodProduced;
+        const woodCanAdd = Math.min(woodProduced, simulation.maxCapacity.wood - simulation.inventory.wood);
+        simulation.inventory.wood += woodCanAdd;
+        simulation.accumulator.rawWood -= woodCanAdd;
     }
 
     simulation.produced.rawMaterial += rawRate * deltaTime;
+
+    // Check if raw materials exceed 500 - terminate simulation
+    if (simulation.produced.rawMaterial > 500) {
+        simulation.running = false;
+        alert('🛑 SIMULATION TERMINATED!\n\nRaw material production has exceeded 500 units.\n\nThis indicates severe production bottlenecks downstream. Please adjust your production rates and reset the simulation.');
+        return;
+    }
 
     // Stage 2: Metal Shop - Machine 1 (Bolts)
     const boltRate = getEffectiveRate('bolt', simulation.controls.metalShopSpeed);
     simulation.accumulator.machine1 += boltRate * deltaTime;
     if (simulation.accumulator.machine1 >= 1 && simulation.inventory.steel >= 1) {
-        const boltsWanted = Math.floor(simulation.accumulator.machine1);
-        const boltsMade = Math.min(boltsWanted, simulation.inventory.steel);
-        simulation.inventory.steel -= boltsMade;
-        simulation.inventory.bolts += boltsMade;
-        simulation.produced.machine1 += boltsMade;
-        simulation.accumulator.machine1 -= boltsMade;
-        updateMachineStatus('status1', 'Running', 'running');
+        // Check if bolt buffer has capacity
+        if (simulation.inventory.bolts >= simulation.maxCapacity.bolts) {
+            updateMachineStatus('status1', 'Blocked', 'blocked');
+        } else {
+            const boltsWanted = Math.floor(simulation.accumulator.machine1);
+            const boltsMade = Math.min(
+                boltsWanted,
+                simulation.inventory.steel,
+                simulation.maxCapacity.bolts - simulation.inventory.bolts
+            );
+            simulation.inventory.steel -= boltsMade;
+            simulation.inventory.bolts += boltsMade;
+            simulation.produced.machine1 += boltsMade;
+            simulation.accumulator.machine1 -= boltsMade;
+            updateMachineStatus('status1', 'Running', 'running');
+        }
     } else if (simulation.inventory.steel < 1) {
         updateMachineStatus('status1', 'Waiting', 'waiting');
     }
@@ -271,13 +301,22 @@ function updateSimulation() {
     const rodRate = getEffectiveRate('rod', simulation.controls.metalShopSpeed);
     simulation.accumulator.machine2 += rodRate * deltaTime;
     if (simulation.accumulator.machine2 >= 1 && simulation.inventory.steel >= 1) {
-        const rodsWanted = Math.floor(simulation.accumulator.machine2);
-        const rodsMade = Math.min(rodsWanted, simulation.inventory.steel);
-        simulation.inventory.steel -= rodsMade;
-        simulation.inventory.rods += rodsMade;
-        simulation.produced.machine2 += rodsMade;
-        simulation.accumulator.machine2 -= rodsMade;
-        updateMachineStatus('status2', 'Running', 'running');
+        // Check if rod buffer has capacity
+        if (simulation.inventory.rods >= simulation.maxCapacity.rods) {
+            updateMachineStatus('status2', 'Blocked', 'blocked');
+        } else {
+            const rodsWanted = Math.floor(simulation.accumulator.machine2);
+            const rodsMade = Math.min(
+                rodsWanted,
+                simulation.inventory.steel,
+                simulation.maxCapacity.rods - simulation.inventory.rods
+            );
+            simulation.inventory.steel -= rodsMade;
+            simulation.inventory.rods += rodsMade;
+            simulation.produced.machine2 += rodsMade;
+            simulation.accumulator.machine2 -= rodsMade;
+            updateMachineStatus('status2', 'Running', 'running');
+        }
     } else if (simulation.inventory.steel < 1) {
         updateMachineStatus('status2', 'Waiting', 'waiting');
     }
@@ -286,22 +325,28 @@ function updateSimulation() {
     const legRate = getEffectiveRate('leg', simulation.controls.metalShopSpeed);
     simulation.accumulator.machine3 += legRate * deltaTime;
     if (simulation.accumulator.machine3 >= 1) {
-        const legsWanted = Math.floor(simulation.accumulator.machine3);
-        const legsCanMake = Math.min(
-            legsWanted,
-            Math.floor(simulation.inventory.bolts / 8),
-            Math.floor(simulation.inventory.rods / 4)
-        );
-
-        if (legsCanMake > 0) {
-            simulation.inventory.bolts -= legsCanMake * 8;
-            simulation.inventory.rods -= legsCanMake * 4;
-            simulation.inventory.legs += legsCanMake;
-            simulation.produced.machine3 += legsCanMake;
-            simulation.accumulator.machine3 -= legsCanMake;
-            updateMachineStatus('status3', 'Running', 'running');
+        // Check if leg buffer has capacity
+        if (simulation.inventory.legs >= simulation.maxCapacity.legs) {
+            updateMachineStatus('status3', 'Blocked', 'blocked');
         } else {
-            updateMachineStatus('status3', 'Waiting', 'waiting');
+            const legsWanted = Math.floor(simulation.accumulator.machine3);
+            const legsCanMake = Math.min(
+                legsWanted,
+                Math.floor(simulation.inventory.bolts / 8),
+                Math.floor(simulation.inventory.rods / 4),
+                simulation.maxCapacity.legs - simulation.inventory.legs
+            );
+
+            if (legsCanMake > 0) {
+                simulation.inventory.bolts -= legsCanMake * 8;
+                simulation.inventory.rods -= legsCanMake * 4;
+                simulation.inventory.legs += legsCanMake;
+                simulation.produced.machine3 += legsCanMake;
+                simulation.accumulator.machine3 -= legsCanMake;
+                updateMachineStatus('status3', 'Running', 'running');
+            } else {
+                updateMachineStatus('status3', 'Waiting', 'waiting');
+            }
         }
     }
 
@@ -309,13 +354,22 @@ function updateSimulation() {
     const seatRate = getEffectiveRate('seat', simulation.controls.woodShopSpeed);
     simulation.accumulator.machine4 += seatRate * deltaTime;
     if (simulation.accumulator.machine4 >= 1 && simulation.inventory.wood >= 2) {
-        const seatsWanted = Math.floor(simulation.accumulator.machine4);
-        const seatsMade = Math.min(seatsWanted, Math.floor(simulation.inventory.wood / 2));
-        simulation.inventory.wood -= seatsMade * 2;
-        simulation.inventory.seats += seatsMade;
-        simulation.produced.machine4 += seatsMade;
-        simulation.accumulator.machine4 -= seatsMade;
-        updateMachineStatus('status4', 'Running', 'running');
+        // Check if seat buffer has capacity
+        if (simulation.inventory.seats >= simulation.maxCapacity.seats) {
+            updateMachineStatus('status4', 'Blocked', 'blocked');
+        } else {
+            const seatsWanted = Math.floor(simulation.accumulator.machine4);
+            const seatsMade = Math.min(
+                seatsWanted,
+                Math.floor(simulation.inventory.wood / 2),
+                simulation.maxCapacity.seats - simulation.inventory.seats
+            );
+            simulation.inventory.wood -= seatsMade * 2;
+            simulation.inventory.seats += seatsMade;
+            simulation.produced.machine4 += seatsMade;
+            simulation.accumulator.machine4 -= seatsMade;
+            updateMachineStatus('status4', 'Running', 'running');
+        }
     } else if (simulation.inventory.wood < 2) {
         updateMachineStatus('status4', 'Waiting', 'waiting');
     }
@@ -324,13 +378,22 @@ function updateSimulation() {
     const backRate = getEffectiveRate('back', simulation.controls.woodShopSpeed);
     simulation.accumulator.machine5 += backRate * deltaTime;
     if (simulation.accumulator.machine5 >= 1 && simulation.inventory.wood >= 2) {
-        const backsWanted = Math.floor(simulation.accumulator.machine5);
-        const backsMade = Math.min(backsWanted, Math.floor(simulation.inventory.wood / 2));
-        simulation.inventory.wood -= backsMade * 2;
-        simulation.inventory.backs += backsMade;
-        simulation.produced.machine5 += backsMade;
-        simulation.accumulator.machine5 -= backsMade;
-        updateMachineStatus('status5', 'Running', 'running');
+        // Check if back buffer has capacity
+        if (simulation.inventory.backs >= simulation.maxCapacity.backs) {
+            updateMachineStatus('status5', 'Blocked', 'blocked');
+        } else {
+            const backsWanted = Math.floor(simulation.accumulator.machine5);
+            const backsMade = Math.min(
+                backsWanted,
+                Math.floor(simulation.inventory.wood / 2),
+                simulation.maxCapacity.backs - simulation.inventory.backs
+            );
+            simulation.inventory.wood -= backsMade * 2;
+            simulation.inventory.backs += backsMade;
+            simulation.produced.machine5 += backsMade;
+            simulation.accumulator.machine5 -= backsMade;
+            updateMachineStatus('status5', 'Running', 'running');
+        }
     } else if (simulation.inventory.wood < 2) {
         updateMachineStatus('status5', 'Waiting', 'waiting');
     }
@@ -339,24 +402,30 @@ function updateSimulation() {
     const assemblyRate = getEffectiveRate('assembly', simulation.controls.assemblySpeed);
     simulation.accumulator.machine6 += assemblyRate * deltaTime;
     if (simulation.accumulator.machine6 >= 1) {
-        const chairsWanted = Math.floor(simulation.accumulator.machine6);
-        const chairsCanMake = Math.min(
-            chairsWanted,
-            Math.floor(simulation.inventory.legs / 4),
-            simulation.inventory.seats,
-            simulation.inventory.backs
-        );
-
-        if (chairsCanMake > 0) {
-            simulation.inventory.legs -= chairsCanMake * 4;
-            simulation.inventory.seats -= chairsCanMake;
-            simulation.inventory.backs -= chairsCanMake;
-            simulation.inventory.assembled += chairsCanMake;
-            simulation.produced.machine6 += chairsCanMake;
-            simulation.accumulator.machine6 -= chairsCanMake;
-            updateMachineStatus('status6', 'Running', 'running');
+        // Check if assembled buffer has capacity
+        if (simulation.inventory.assembled >= simulation.maxCapacity.assembled) {
+            updateMachineStatus('status6', 'Blocked', 'blocked');
         } else {
-            updateMachineStatus('status6', 'Waiting', 'waiting');
+            const chairsWanted = Math.floor(simulation.accumulator.machine6);
+            const chairsCanMake = Math.min(
+                chairsWanted,
+                Math.floor(simulation.inventory.legs / 4),
+                simulation.inventory.seats,
+                simulation.inventory.backs,
+                simulation.maxCapacity.assembled - simulation.inventory.assembled
+            );
+
+            if (chairsCanMake > 0) {
+                simulation.inventory.legs -= chairsCanMake * 4;
+                simulation.inventory.seats -= chairsCanMake;
+                simulation.inventory.backs -= chairsCanMake;
+                simulation.inventory.assembled += chairsCanMake;
+                simulation.produced.machine6 += chairsCanMake;
+                simulation.accumulator.machine6 -= chairsCanMake;
+                updateMachineStatus('status6', 'Running', 'running');
+            } else {
+                updateMachineStatus('status6', 'Waiting', 'waiting');
+            }
         }
     }
 
