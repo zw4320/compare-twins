@@ -543,20 +543,361 @@
             font-size: 2rem;
         }
 
-        /* Footer */
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
+        /* SVG Icon Styles */
+        .svg-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            display: block;
+        }
+
+        .feature-card .svg-icon,
+        .benefit-item .svg-icon {
+            fill: #2563eb;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+            padding: 4rem 2rem;
+            margin: 4rem -2rem 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: white;
             padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 3rem;
+            color: #2563eb;
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-info h4 {
+            color: #1e3a8a;
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-rating {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+        }
+
+        /* Trusted By Section */
+        .trusted-by {
+            text-align: center;
+            padding: 3rem 0;
+            background: white;
+        }
+
+        .trusted-by h3 {
+            color: #666;
+            font-size: 1rem;
+            font-weight: normal;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .company-logo {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #1e3a8a;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .company-logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 3rem auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-button {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+            transition: transform 0.3s ease;
+            z-index: 999;
+            border: none;
+            font-size: 1.5rem;
+        }
+
+        .back-to-top:hover {
+            transform: scale(1.1);
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+
+        /* Enhanced Footer */
+        .enhanced-footer {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            color: white;
+            padding: 4rem 2rem 2rem;
             margin-top: 4rem;
         }
 
-        /* Responsive */
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+        }
+
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .newsletter-form button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background: #1d4ed8;
+        }
+
+        /* Smooth Scroll & Animations */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Improved Mobile Responsiveness */
         @media (max-width: 768px) {
-            .nav-links {
+            nav {
                 flex-direction: column;
                 gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
             }
 
             .hero h1 {
@@ -570,10 +911,68 @@
             .machine-row {
                 flex-direction: column;
             }
-            
+
             .stats-panel {
                 flex-direction: column;
                 gap: 1rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .content-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .pricing-price {
+                font-size: 2.5rem;
             }
         }
     </style>
@@ -635,6 +1034,76 @@
                         <div class="feature-icon">🎯</div>
                         <h3>Risk Mitigation</h3>
                         <p>Test changes and new processes in a virtual environment to identify risks and validate solutions before implementation.</p>
+                    </div>
+                </div>
+
+                <!-- Trusted By Section -->
+                <div class="trusted-by">
+                    <h3>Trusted by Industry Leaders</h3>
+                    <div class="logo-grid">
+                        <div class="company-logo">Siemens</div>
+                        <div class="company-logo">GE Digital</div>
+                        <div class="company-logo">Tesla</div>
+                        <div class="company-logo">Boeing</div>
+                        <div class="company-logo">Microsoft</div>
+                        <div class="company-logo">Amazon</div>
+                    </div>
+                </div>
+
+                <!-- Testimonials Section -->
+                <div class="testimonials-section">
+                    <div class="container">
+                        <h2 style="color: #1e3a8a; text-align: center; margin-bottom: 1rem;">What Our Clients Say</h2>
+                        <p style="text-align: center; color: #666; max-width: 600px; margin: 0 auto;">
+                            Hear from organizations that have transformed their operations with digital twin technology.
+                        </p>
+
+                        <div class="testimonial-grid">
+                            <div class="testimonial-card">
+                                <div class="testimonial-quote">"</div>
+                                <div class="testimonial-rating">★★★★★</div>
+                                <p class="testimonial-text">
+                                    "Digital twins have revolutionized our manufacturing process. We've reduced downtime by 45% and increased efficiency by 28% in just six months. The ROI exceeded our expectations."
+                                </p>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-avatar">SJ</div>
+                                    <div class="testimonial-info">
+                                        <h4>Sarah Johnson</h4>
+                                        <p>VP of Operations, AutoTech Industries</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-card">
+                                <div class="testimonial-quote">"</div>
+                                <div class="testimonial-rating">★★★★★</div>
+                                <p class="testimonial-text">
+                                    "The predictive maintenance capabilities alone have saved us millions. We can now anticipate equipment failures weeks in advance and schedule maintenance proactively."
+                                </p>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-avatar">MC</div>
+                                    <div class="testimonial-info">
+                                        <h4>Michael Chen</h4>
+                                        <p>Director of Engineering, PowerGrid Solutions</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-card">
+                                <div class="testimonial-quote">"</div>
+                                <div class="testimonial-rating">★★★★★</div>
+                                <p class="testimonial-text">
+                                    "Implementation was seamless, and the support team was exceptional. We saw measurable improvements within the first month. This technology is a game-changer for our industry."
+                                </p>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-avatar">EP</div>
+                                    <div class="testimonial-info">
+                                        <h4>Emily Parker</h4>
+                                        <p>CTO, Global Logistics Corp</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1225,6 +1694,53 @@
                     </div>
                 </div>
 
+                <!-- Professional Contact Form -->
+                <div class="contact-form">
+                    <h3 style="color: #1e3a8a; text-align: center; margin-bottom: 0.5rem; font-size: 1.8rem;">Contact Our Team</h3>
+                    <p style="text-align: center; color: #666; margin-bottom: 2rem;">Fill out the form below and we'll get back to you within 24 hours.</p>
+
+                    <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="John Smith">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="john.smith@company.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Company Name *</label>
+                            <input type="text" id="company" name="company" required placeholder="Your Company">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inquiry-type">Inquiry Type *</label>
+                            <select id="inquiry-type" name="inquiry-type" required>
+                                <option value="">Select an option...</option>
+                                <option value="demo">Request a Demo</option>
+                                <option value="pricing">Pricing Information</option>
+                                <option value="enterprise">Enterprise Solutions</option>
+                                <option value="support">Technical Support</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required placeholder="Tell us about your needs and goals..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-button">Send Message</button>
+                    </form>
+                </div>
+
                 <div class="feature-grid">
                     <div class="feature-card" style="text-align: center;">
                         <div class="feature-icon">📞</div>
@@ -1295,12 +1811,144 @@
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Digital Twins. All rights reserved.</p>
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        ↑
+    </button>
+
+    <!-- Enhanced Footer -->
+    <footer class="enhanced-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Digital Twins</h3>
+                <p>Leading the digital transformation revolution with cutting-edge virtual replica technology for enterprises worldwide.</p>
+                <div class="social-links">
+                    <a href="#" title="LinkedIn">in</a>
+                    <a href="#" title="Twitter">𝕏</a>
+                    <a href="#" title="Facebook">f</a>
+                    <a href="#" title="YouTube">▶</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Products</h3>
+                <ul>
+                    <li><a href="#" onclick="showPage('information')">Interactive Demo</a></li>
+                    <li><a href="#" onclick="showPage('pricing')">Pricing Plans</a></li>
+                    <li><a href="#" onclick="showPage('benefits')">Benefits</a></li>
+                    <li><a href="#">Enterprise Solutions</a></li>
+                    <li><a href="#">API Documentation</a></li>
+                    <li><a href="#">Integrations</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#" onclick="showPage('who-uses')">Case Studies</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">White Papers</a></li>
+                    <li><a href="#">Webinars</a></li>
+                    <li><a href="#">Training</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Partners</a></li>
+                    <li><a href="#" onclick="showPage('where-to-buy')">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to our newsletter for the latest updates and insights.</p>
+                <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Digital Twins. All rights reserved. | Building the future, one virtual twin at a time.</p>
+        </div>
     </footer>
 
     <!-- Link to JavaScript file -->
     <script src="script.js"></script>
+
+    <!-- Additional JavaScript for new features -->
+    <script>
+        // Back to Top Button
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Fade-in Animation on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all feature cards, testimonials, and benefit items
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.feature-card, .testimonial-card, .benefit-item, .pricing-card');
+            fadeElements.forEach(el => {
+                el.classList.add('fade-in');
+                observer.observe(el);
+            });
+        });
+
+        // Contact Form Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+
+            // Simulate form submission
+            alert('Thank you for your inquiry! We\'ll get back to you within 24 hours.\n\nYour information:\n' +
+                  'Name: ' + data.name + '\n' +
+                  'Email: ' + data.email + '\n' +
+                  'Company: ' + data.company + '\n' +
+                  'Inquiry Type: ' + data['inquiry-type']);
+
+            event.target.reset();
+        }
+
+        // Newsletter Form Handler
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input').value;
+            alert('Thank you for subscribing! We\'ll send updates to: ' + email);
+            event.target.reset();
+        }
+    </script>
 </body>
 </html>
