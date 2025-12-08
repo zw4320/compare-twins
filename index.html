@@ -408,6 +408,301 @@
             color: #fbbf24;
         }
 
+        /* Enhanced Factory Simulation Styles */
+        .flow-arrow {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flow-arrow-animated {
+            position: relative;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #e5e7eb 0%, #3b82f6 50%, #e5e7eb 100%);
+            background-size: 200% 100%;
+            animation: flowAnimation 2s linear infinite;
+            border-radius: 2px;
+            margin: 0 0.5rem;
+        }
+
+        .flow-arrow-animated::after {
+            content: '▶';
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #3b82f6;
+            font-size: 1rem;
+            animation: pulseArrow 1s ease-in-out infinite;
+        }
+
+        @keyframes flowAnimation {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        @keyframes pulseArrow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Material Flow Particles */
+        .material-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: particleFlow 3s linear infinite;
+            z-index: 10;
+        }
+
+        .material-particle.steel {
+            background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
+            box-shadow: 0 0 4px rgba(107, 114, 128, 0.6);
+        }
+
+        .material-particle.wood {
+            background: linear-gradient(135deg, #92400e 0%, #b45309 100%);
+            box-shadow: 0 0 4px rgba(180, 83, 9, 0.6);
+        }
+
+        .material-particle.product {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            box-shadow: 0 0 4px rgba(37, 99, 235, 0.6);
+        }
+
+        @keyframes particleFlow {
+            0% { left: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 100%; opacity: 0; }
+        }
+
+        /* Machine Progress Bars */
+        .machine-progress {
+            width: 100%;
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .machine-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .machine-progress-bar.active {
+            animation: progressPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes progressPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* Machine Working Animation */
+        .machine.working {
+            animation: machineVibrate 0.3s ease-in-out infinite;
+        }
+
+        @keyframes machineVibrate {
+            0%, 100% { transform: translateY(0); }
+            25% { transform: translateY(-1px); }
+            75% { transform: translateY(1px); }
+        }
+
+        .machine-icon.rotating {
+            animation: rotate 2s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Color-coded Inventory Buffers */
+        .inventory-buffer.steel {
+            border-left: 4px solid #6b7280;
+            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+        }
+
+        .inventory-buffer.wood {
+            border-left: 4px solid #92400e;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        }
+
+        .inventory-buffer.metal-parts {
+            border-left: 4px solid #3b82f6;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        }
+
+        .inventory-buffer.wood-parts {
+            border-left: 4px solid #b45309;
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        }
+
+        .inventory-buffer.final {
+            border-left: 4px solid #16a34a;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+
+        /* Machine Type Specific Styling */
+        .machine.metal-shop {
+            border: 2px solid #6b7280;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+        }
+
+        .machine.wood-shop {
+            border: 2px solid #92400e;
+            background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+        }
+
+        .machine.assembly {
+            border: 2px solid #2563eb;
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+        }
+
+        .machine.quality-control {
+            border: 2px solid #16a34a;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+        }
+
+        /* Tooltip Styling */
+        .machine-tooltip {
+            position: absolute;
+            background: rgba(30, 41, 59, 0.95);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            z-index: 1000;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: none;
+            pointer-events: none;
+        }
+
+        .machine:hover .machine-tooltip {
+            display: block;
+        }
+
+        .machine-tooltip h5 {
+            margin-bottom: 0.5rem;
+            color: #3b82f6;
+            font-size: 0.95rem;
+        }
+
+        .machine-tooltip p {
+            margin: 0.25rem 0;
+            line-height: 1.4;
+        }
+
+        /* Utilization Indicator */
+        .utilization-bar {
+            width: 100%;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .utilization-fill {
+            height: 100%;
+            transition: width 0.5s ease, background-color 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .utilization-fill.high {
+            background: #16a34a;
+        }
+
+        .utilization-fill.medium {
+            background: #fbbf24;
+        }
+
+        .utilization-fill.low {
+            background: #ef4444;
+        }
+
+        /* Factory Floor Background */
+        .manufacturing-flow {
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    #f1f5f9 0px,
+                    #f1f5f9 2px,
+                    transparent 2px,
+                    transparent 40px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    #f1f5f9 0px,
+                    #f1f5f9 2px,
+                    transparent 2px,
+                    transparent 40px
+                ),
+                linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        /* Stage Labels with Icons */
+        .stage-label {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .stage-label::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+            animation: stagePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes stagePulse {
+            0%, 100% { opacity: 0.5; box-shadow: 0 0 0 0 currentColor; }
+            50% { opacity: 1; box-shadow: 0 0 0 4px rgba(255,255,255,0.3); }
+        }
+
+        /* Production Metrics Display */
+        .machine-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+        }
+
+        .metric-item {
+            background: #f8f9fa;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .metric-label {
+            color: #666;
+            font-size: 0.7rem;
+        }
+
+        .metric-value {
+            color: #2563eb;
+            font-weight: bold;
+        }
+
         /* Pricing Cards */
         .pricing-grid {
             display: grid;
@@ -1206,179 +1501,227 @@
                             </div>
                         </div>
 
-                        <div class="flow-arrow">→</div>
+                        <div class="flow-arrow">
+                            <div class="flow-arrow-animated"></div>
+                        </div>
 
                         <!-- Buffers -->
                         <div class="buffer-row">
-                            <div class="inventory-buffer">
-                                <div class="buffer-label">Steel</div>
+                            <div class="inventory-buffer steel">
+                                <div class="buffer-label">🔩 Steel</div>
                                 <div class="buffer-amount" id="steel-inventory">0</div>
                             </div>
-                            <div class="inventory-buffer">
-                                <div class="buffer-label">Wood</div>
+                            <div class="inventory-buffer wood">
+                                <div class="buffer-label">🪵 Wood</div>
                                 <div class="buffer-amount" id="wood-inventory">0</div>
                             </div>
                         </div>
 
-                        <div class="flow-arrow">→</div>
+                        <div class="flow-arrow">
+                            <div class="flow-arrow-animated"></div>
+                        </div>
 
                         <!-- Stage 2: Metal Shop -->
                         <div class="production-stage">
                             <div class="stage-label">Metal Shop</div>
                             <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                                <div class="machine" id="machine1">
-                                    <div class="machine-header">M1</div>
+                                <div class="machine metal-shop" id="machine1">
+                                    <div class="machine-header">M1 - Bolt Press</div>
                                     <div class="machine-body">
-                                        <div class="machine-icon">🔩</div>
+                                        <div class="machine-icon" id="icon1">🔩</div>
                                         <div class="machine-name">Bolts</div>
+                                        <div class="machine-recipe" style="font-size: 0.75rem;">1 Steel → 1 Bolt</div>
                                         <div class="production-count"><span id="count1">0</span></div>
+                                        <div class="machine-progress">
+                                            <div class="machine-progress-bar" id="progress1"></div>
+                                        </div>
                                         <div class="machine-status" id="status1">Running</div>
                                     </div>
                                 </div>
-                                <div class="machine" id="machine2">
-                                    <div class="machine-header">M2</div>
+                                <div class="machine metal-shop" id="machine2">
+                                    <div class="machine-header">M2 - Rod Mill</div>
                                     <div class="machine-body">
-                                        <div class="machine-icon">📏</div>
+                                        <div class="machine-icon" id="icon2">📏</div>
                                         <div class="machine-name">Rods</div>
+                                        <div class="machine-recipe" style="font-size: 0.75rem;">1 Steel → 1 Rod</div>
                                         <div class="production-count"><span id="count2">0</span></div>
+                                        <div class="machine-progress">
+                                            <div class="machine-progress-bar" id="progress2"></div>
+                                        </div>
                                         <div class="machine-status" id="status2">Running</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="flow-arrow">→</div>
+                        <div class="flow-arrow">
+                            <div class="flow-arrow-animated"></div>
+                        </div>
 
                         <!-- Metal Buffers -->
                         <div class="buffer-row">
-                            <div class="inventory-buffer">
-                                <div class="buffer-label">Bolts</div>
+                            <div class="inventory-buffer metal-parts">
+                                <div class="buffer-label">🔩 Bolts</div>
                                 <div class="buffer-amount" id="bolt-inventory">0</div>
                             </div>
-                            <div class="inventory-buffer">
-                                <div class="buffer-label">Rods</div>
+                            <div class="inventory-buffer metal-parts">
+                                <div class="buffer-label">📏 Rods</div>
                                 <div class="buffer-amount" id="rod-inventory">0</div>
                             </div>
                         </div>
 
-                        <div class="flow-arrow">→</div>
+                        <div class="flow-arrow">
+                            <div class="flow-arrow-animated"></div>
+                        </div>
 
                         <!-- Stage 3: Metal Assembly -->
                         <div class="production-stage">
                             <div class="stage-label">Metal Assembly</div>
-                            <div class="machine machine-large" id="machine3">
-                                <div class="machine-header">M3</div>
+                            <div class="machine machine-large assembly" id="machine3">
+                                <div class="machine-header">M3 - Leg Assembly</div>
                                 <div class="machine-body">
-                                    <div class="machine-icon">🦵</div>
-                                    <div class="machine-name">Legs</div>
-                                    <div class="machine-recipe">8B + 4R</div>
-                                    <div class="production-count"><span id="count3">0</span></div>
+                                    <div class="machine-icon" id="icon3">🦵</div>
+                                    <div class="machine-name">Chair Legs</div>
+                                    <div class="machine-recipe">8 Bolts + 4 Rods → 1 Leg Set</div>
+                                    <div class="production-count"><span id="count3">0</span> sets</div>
+                                    <div class="machine-progress">
+                                        <div class="machine-progress-bar" id="progress3"></div>
+                                    </div>
                                     <div class="machine-status" id="status3">Running</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="flow-arrow">→</div>
+                        <div class="flow-arrow">
+                            <div class="flow-arrow-animated"></div>
+                        </div>
 
                         <!-- Leg Buffer -->
                         <div class="buffer-row">
-                            <div class="inventory-buffer">
-                                <div class="buffer-label">Legs</div>
+                            <div class="inventory-buffer metal-parts">
+                                <div class="buffer-label">🦵 Leg Sets</div>
                                 <div class="buffer-amount" id="leg-inventory">0</div>
                             </div>
                         </div>
 
-                        <div class="flow-arrow">→</div>
+                        <div class="flow-arrow">
+                            <div class="flow-arrow-animated"></div>
+                        </div>
 
                         <!-- Stage 4: Wood Shop -->
                         <div class="production-stage">
                             <div class="stage-label">Wood Shop</div>
                             <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                                <div class="machine" id="machine4">
-                                    <div class="machine-header">M4</div>
+                                <div class="machine wood-shop" id="machine4">
+                                    <div class="machine-header">M4 - Seat Cutter</div>
                                     <div class="machine-body">
-                                        <div class="machine-icon">💺</div>
+                                        <div class="machine-icon" id="icon4">💺</div>
                                         <div class="machine-name">Seats</div>
+                                        <div class="machine-recipe" style="font-size: 0.75rem;">1 Wood → 1 Seat</div>
                                         <div class="production-count"><span id="count4">0</span></div>
+                                        <div class="machine-progress">
+                                            <div class="machine-progress-bar" id="progress4"></div>
+                                        </div>
                                         <div class="machine-status" id="status4">Running</div>
                                     </div>
                                 </div>
-                                <div class="machine" id="machine5">
-                                    <div class="machine-header">M5</div>
+                                <div class="machine wood-shop" id="machine5">
+                                    <div class="machine-header">M5 - Back Shaper</div>
                                     <div class="machine-body">
-                                        <div class="machine-icon">🪑</div>
+                                        <div class="machine-icon" id="icon5">🪑</div>
                                         <div class="machine-name">Backs</div>
+                                        <div class="machine-recipe" style="font-size: 0.75rem;">2 Wood → 1 Back</div>
                                         <div class="production-count"><span id="count5">0</span></div>
+                                        <div class="machine-progress">
+                                            <div class="machine-progress-bar" id="progress5"></div>
+                                        </div>
                                         <div class="machine-status" id="status5">Running</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="flow-arrow">→</div>
+                        <div class="flow-arrow">
+                            <div class="flow-arrow-animated"></div>
+                        </div>
 
                         <!-- Wood Buffers -->
                         <div class="buffer-row">
-                            <div class="inventory-buffer">
-                                <div class="buffer-label">Seats</div>
+                            <div class="inventory-buffer wood-parts">
+                                <div class="buffer-label">💺 Seats</div>
                                 <div class="buffer-amount" id="seat-inventory">0</div>
                             </div>
-                            <div class="inventory-buffer">
-                                <div class="buffer-label">Backs</div>
+                            <div class="inventory-buffer wood-parts">
+                                <div class="buffer-label">🪑 Backs</div>
                                 <div class="buffer-amount" id="back-inventory">0</div>
                             </div>
                         </div>
 
-                        <div class="flow-arrow">→</div>
+                        <div class="flow-arrow">
+                            <div class="flow-arrow-animated"></div>
+                        </div>
 
                         <!-- Stage 5: Assembly -->
                         <div class="production-stage">
                             <div class="stage-label">Assembly Line</div>
-                            <div class="machine machine-large" id="machine6">
-                                <div class="machine-header">M6</div>
+                            <div class="machine machine-large assembly" id="machine6">
+                                <div class="machine-header">M6 - Final Assembly</div>
                                 <div class="machine-body">
-                                    <div class="machine-icon">🪑</div>
+                                    <div class="machine-icon" id="icon6">🪑</div>
                                     <div class="machine-name">Assembly</div>
-                                    <div class="machine-recipe">4L+1S+1B</div>
-                                    <div class="production-count"><span id="count6">0</span></div>
+                                    <div class="machine-recipe">4 Legs + 1 Seat + 1 Back → Chair</div>
+                                    <div class="production-count"><span id="count6">0</span> chairs</div>
+                                    <div class="machine-progress">
+                                        <div class="machine-progress-bar" id="progress6"></div>
+                                    </div>
                                     <div class="machine-status" id="status6">Running</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="flow-arrow">→</div>
+                        <div class="flow-arrow">
+                            <div class="flow-arrow-animated"></div>
+                        </div>
 
                         <!-- Chair Buffer -->
                         <div class="buffer-row">
-                            <div class="inventory-buffer">
-                                <div class="buffer-label">Assembled</div>
+                            <div class="inventory-buffer metal-parts">
+                                <div class="buffer-label">🪑 Assembled</div>
                                 <div class="buffer-amount" id="assembled-inventory">0</div>
                             </div>
                         </div>
 
-                        <div class="flow-arrow">→</div>
+                        <div class="flow-arrow">
+                            <div class="flow-arrow-animated"></div>
+                        </div>
 
                         <!-- Stage 6: Quality Control -->
                         <div class="production-stage">
                             <div class="stage-label">Quality Control</div>
-                            <div class="machine" id="machine-qc">
-                                <div class="machine-header">QC</div>
+                            <div class="machine quality-control" id="machine-qc">
+                                <div class="machine-header">QC - Inspector</div>
                                 <div class="machine-body">
-                                    <div class="machine-icon">✅</div>
-                                    <div class="machine-name">Inspector</div>
-                                    <div class="production-count"><span id="count-qc">0</span></div>
+                                    <div class="machine-icon" id="icon-qc">✅</div>
+                                    <div class="machine-name">Quality Check</div>
+                                    <div class="machine-recipe" style="font-size: 0.75rem;">Testing & Inspection</div>
+                                    <div class="production-count"><span id="count-qc">0</span> passed</div>
+                                    <div class="machine-progress">
+                                        <div class="machine-progress-bar" id="progress-qc"></div>
+                                    </div>
                                     <div class="machine-status" id="status-qc">Running</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="flow-arrow">→</div>
+                        <div class="flow-arrow">
+                            <div class="flow-arrow-animated"></div>
+                        </div>
 
                         <!-- Final Output -->
                         <div class="production-stage">
                             <div class="stage-label">Finished</div>
-                            <div class="inventory-buffer">
-                                <div class="buffer-label">Chairs</div>
+                            <div class="inventory-buffer final">
+                                <div class="buffer-label">✨ Quality Chairs</div>
                                 <div class="buffer-amount" id="final-chairs">0</div>
                             </div>
                         </div>
