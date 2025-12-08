@@ -483,6 +483,15 @@ function updateDisplay() {
     updateInventoryDisplay('assembled-inventory', simulation.inventory.assembled);
     updateInventoryDisplay('final-chairs', simulation.produced.final);
 
+    // Update visual effects - progress bars and animations
+    updateMachineVisuals('machine1', 'progress1', 'icon1', simulation.accumulator.machine1, simulation.inventory.steel >= 1);
+    updateMachineVisuals('machine2', 'progress2', 'icon2', simulation.accumulator.machine2, simulation.inventory.steel >= 1);
+    updateMachineVisuals('machine3', 'progress3', 'icon3', simulation.accumulator.machine3, simulation.inventory.bolts >= 8 && simulation.inventory.rods >= 4);
+    updateMachineVisuals('machine4', 'progress4', 'icon4', simulation.accumulator.machine4, simulation.inventory.wood >= 1);
+    updateMachineVisuals('machine5', 'progress5', 'icon5', simulation.accumulator.machine5, simulation.inventory.wood >= 2);
+    updateMachineVisuals('machine6', 'progress6', 'icon6', simulation.accumulator.machine6, simulation.inventory.legs >= 4 && simulation.inventory.seats >= 1 && simulation.inventory.backs >= 1);
+    updateMachineVisuals('machine-qc', 'progress-qc', 'icon-qc', simulation.accumulator.qc || 0, simulation.inventory.assembled >= 1);
+
     // Update statistics
     updateElement('chairs-produced', simulation.produced.final);
 
@@ -662,3 +671,54 @@ function resetSimulation() {
     updateMachineStatus('status6', 'Running', 'running');
     updateMachineStatus('status-qc', 'Running', 'running');
 }
+// ========================================
+// Visual Enhancement Functions
+// ========================================
+
+/**
+ * Updates machine visual effects including progress bars, working animations, and icon rotations
+ * @param {string} machineId - ID of the machine element
+ * @param {string} progressId - ID of the progress bar element  
+ * @param {string} iconId - ID of the machine icon element
+ * @param {number} accumulator - Current accumulator value (0-1 represents progress)
+ * @param {boolean} hasResources - Whether machine has required resources
+ */
+function updateMachineVisuals(machineId, progressId, iconId, accumulator, hasResources) {
+    const machine = document.getElementById(machineId);
+    const progressBar = document.getElementById(progressId);
+    const icon = document.getElementById(iconId);
+    
+    if (!machine || !progressBar || !icon) return;
+    
+    // Calculate progress percentage (0-100)
+    const progress = Math.min(100, accumulator * 100);
+    
+    // Update progress bar width
+    progressBar.style.width = progress + '%';
+    
+    // Add/remove working class for vibration animation
+    if (hasResources && progress > 0) {
+        machine.classList.add('working');
+        progressBar.classList.add('active');
+        
+        // Rotate icons for active machines (except QC)
+        if (!machineId.includes('qc')) {
+            icon.classList.add('rotating');
+        }
+    } else {
+        machine.classList.remove('working');
+        progressBar.classList.remove('active');
+        icon.classList.remove('rotating');
+    }
+}
+
+// Initialize simulation on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Start the simulation immediately for demo purposes
+    simulation.running = true;
+    simulation.lastUpdate = Date.now();
+    requestAnimationFrame(updateSimulation);
+    
+    console.log('🏭 Enhanced Factory Simulation Loaded!');
+    console.log('✨ Features: Animated flows, progress bars, color-coded materials');
+});
