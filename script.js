@@ -266,13 +266,6 @@ function updateSimulation() {
 
     simulation.produced.rawMaterial += rawRate * deltaTime;
 
-    // Check if raw materials exceed 500 - terminate simulation
-    if (simulation.produced.rawMaterial > 500) {
-        simulation.running = false;
-        alert('🛑 SIMULATION TERMINATED!\n\nRaw material production has exceeded 500 units.\n\nThis indicates severe production bottlenecks downstream. Please adjust your production rates and reset the simulation.');
-        return;
-    }
-
     // Stage 2: Metal Shop - Machine 1 (Bolts)
     const boltRate = getEffectiveRate('bolt', simulation.controls.metalShopSpeed);
     simulation.accumulator.machine1 += boltRate * deltaTime;
