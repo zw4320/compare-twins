@@ -1390,7 +1390,22 @@
                 font-size: 2.5rem;
             }
         }
+
+        /* Phosphor Icons Styling */
+        .ph {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .list-item-icon .ph {
+            font-size: 1.5rem;
+        }
+
+        .feature-icon .ph {
+            font-size: 3rem;
+        }
     </style>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body>
     <!-- Header -->
@@ -1421,32 +1436,32 @@
 
                 <div class="feature-grid">
                     <div class="feature-card">
-                        <div class="feature-icon">🔄</div>
+                        <div class="feature-icon"><i class="ph ph-arrows-clockwise"></i></div>
                         <h3>Real-Time Simulation</h3>
                         <p>Create virtual replicas of physical assets and processes that update in real-time, enabling you to test scenarios without disrupting operations.</p>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon">📊</div>
+                        <div class="feature-icon"><i class="ph ph-chart-line"></i></div>
                         <h3>Data Analytics</h3>
                         <p>Harness the power of IoT sensors and data streams to gain deep insights into performance, efficiency, and potential issues before they occur.</p>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon">⚙️</div>
+                        <div class="feature-icon"><i class="ph ph-gear"></i></div>
                         <h3>Process Optimization</h3>
                         <p>Identify bottlenecks, optimize workflows, and improve production efficiency by 20-30% through continuous simulation and analysis.</p>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon">🔮</div>
+                        <div class="feature-icon"><i class="ph ph-eye"></i></div>
                         <h3>Predictive Maintenance</h3>
                         <p>Reduce downtime by up to 50% with AI-powered predictions that alert you to equipment failures before they happen.</p>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon">💰</div>
+                        <div class="feature-icon"><i class="ph ph-currency-dollar"></i></div>
                         <h3>Cost Reduction</h3>
                         <p>Decrease operational costs by 15-25% through optimized resource allocation, reduced waste, and improved energy efficiency.</p>
                     </div>
                     <div class="feature-card">
-                        <div class="feature-icon">🎯</div>
+                        <div class="feature-icon"><i class="ph ph-target"></i></div>
                         <h3>Risk Mitigation</h3>
                         <p>Test changes and new processes in a virtual environment to identify risks and validate solutions before implementation.</p>
                     </div>
@@ -1568,7 +1583,7 @@
 
                 <!-- Control Information Panel -->
                 <div style="background: #eff6ff; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border-left: 4px solid #2563eb;">
-                    <h4 style="color: #1e3a8a; margin-bottom: 1rem; font-size: 1.1rem;">ℹ️ Control Information</h4>
+                    <h4 style="color: #1e3a8a; margin-bottom: 1rem; font-size: 1.1rem;"><i class="ph ph-info" style="margin-right: 0.5rem;"></i>Control Information</h4>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; font-size: 0.9rem; line-height: 1.6;">
                         <div>
                             <strong style="color: #2563eb;">Quality Control:</strong>
@@ -1862,7 +1877,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">🏭</span>
+                                <span class="list-item-icon"><i class="ph ph-factory"></i></span>
                                 <span>Manufacturing</span>
                             </div>
                         </div>
@@ -1878,7 +1893,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">🏥</span>
+                                <span class="list-item-icon"><i class="ph ph-first-aid-kit"></i></span>
                                 <span>Healthcare</span>
                             </div>
                         </div>
@@ -1894,7 +1909,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">🏙️</span>
+                                <span class="list-item-icon"><i class="ph ph-buildings"></i></span>
                                 <span>Smart Cities</span>
                             </div>
                         </div>
@@ -1910,7 +1925,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">⚡</span>
+                                <span class="list-item-icon"><i class="ph ph-lightning"></i></span>
                                 <span>Energy & Utilities</span>
                             </div>
                         </div>
@@ -1926,7 +1941,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">✈️</span>
+                                <span class="list-item-icon"><i class="ph ph-airplane"></i></span>
                                 <span>Aerospace</span>
                             </div>
                         </div>
@@ -1942,7 +1957,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">🚗</span>
+                                <span class="list-item-icon"><i class="ph ph-car"></i></span>
                                 <span>Automotive</span>
                             </div>
                         </div>
@@ -1958,7 +1973,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">🏢</span>
+                                <span class="list-item-icon"><i class="ph ph-building"></i></span>
                                 <span>Real Estate</span>
                             </div>
                         </div>
@@ -1974,7 +1989,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">🚢</span>
+                                <span class="list-item-icon"><i class="ph ph-truck"></i></span>
                                 <span>Supply Chain</span>
                             </div>
                         </div>
@@ -1990,7 +2005,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">🌾</span>
+                                <span class="list-item-icon"><i class="ph ph-plant"></i></span>
                                 <span>Agriculture</span>
                             </div>
                         </div>
@@ -2109,7 +2124,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">📈</span>
+                                <span class="list-item-icon"><i class="ph ph-trend-up"></i></span>
                                 <span>Increased Efficiency</span>
                             </div>
                         </div>
@@ -2125,7 +2140,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">💰</span>
+                                <span class="list-item-icon"><i class="ph ph-currency-dollar"></i></span>
                                 <span>Cost Reduction</span>
                             </div>
                         </div>
@@ -2141,7 +2156,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">⚡</span>
+                                <span class="list-item-icon"><i class="ph ph-lightning"></i></span>
                                 <span>Reduced Downtime</span>
                             </div>
                         </div>
@@ -2157,7 +2172,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">🎯</span>
+                                <span class="list-item-icon"><i class="ph ph-target"></i></span>
                                 <span>Better Decision Making</span>
                             </div>
                         </div>
@@ -2173,7 +2188,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">🔒</span>
+                                <span class="list-item-icon"><i class="ph ph-shield-check"></i></span>
                                 <span>Risk Mitigation</span>
                             </div>
                         </div>
@@ -2189,7 +2204,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">🚀</span>
+                                <span class="list-item-icon"><i class="ph ph-rocket"></i></span>
                                 <span>Faster Innovation</span>
                             </div>
                         </div>
@@ -2205,7 +2220,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">🌱</span>
+                                <span class="list-item-icon"><i class="ph ph-leaf"></i></span>
                                 <span>Sustainability</span>
                             </div>
                         </div>
@@ -2221,7 +2236,7 @@
                     <div class="list-item">
                         <div class="list-item-header">
                             <div class="list-item-title">
-                                <span class="list-item-icon">📊</span>
+                                <span class="list-item-icon"><i class="ph ph-chart-bar"></i></span>
                                 <span>Data-Driven Culture</span>
                             </div>
                         </div>
@@ -2384,7 +2399,7 @@
 
                 <div class="feature-grid">
                     <div class="feature-card" style="text-align: center;">
-                        <div class="feature-icon">📞</div>
+                        <div class="feature-icon"><i class="ph ph-phone"></i></div>
                         <h3>Schedule a Call</h3>
                         <p>Talk to our solutions team to discuss your specific needs and get personalized recommendations.</p>
                         <p style="margin-top: 1rem;"><strong>sales@digitaltwins.com</strong></p>
@@ -2392,7 +2407,7 @@
                     </div>
 
                     <div class="feature-card" style="text-align: center;">
-                        <div class="feature-icon">📧</div>
+                        <div class="feature-icon"><i class="ph ph-envelope"></i></div>
                         <h3>Request a Demo</h3>
                         <p>See our platform in action with a live demonstration customized to your industry and use case.</p>
                         <p style="margin-top: 1rem;"><strong>demo@digitaltwins.com</strong></p>
@@ -2400,7 +2415,7 @@
                     </div>
 
                     <div class="feature-card" style="text-align: center;">
-                        <div class="feature-icon">💼</div>
+                        <div class="feature-icon"><i class="ph ph-briefcase"></i></div>
                         <h3>Enterprise Solutions</h3>
                         <p>Custom enterprise packages with dedicated support, training, and integration services.</p>
                         <p style="margin-top: 1rem;"><strong>enterprise@digitaltwins.com</strong></p>
@@ -2408,7 +2423,7 @@
                     </div>
 
                     <div class="feature-card" style="text-align: center;">
-                        <div class="feature-icon">🎓</div>
+                        <div class="feature-icon"><i class="ph ph-graduation-cap"></i></div>
                         <h3>Training & Support</h3>
                         <p>Comprehensive training programs and 24/7 technical support to ensure your success.</p>
                         <p style="margin-top: 1rem;"><strong>support@digitaltwins.com</strong></p>
